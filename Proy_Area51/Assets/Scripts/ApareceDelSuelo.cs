@@ -5,12 +5,17 @@ using UnityEngine;
 public class ApareceDelSuelo : MonoBehaviour {
     public SpriteRenderer spriterenderer;
     public Collider2D collider;
-    public Rigidbody2D rigidbody2D;
+    //public Rigidbody2D rigidbody2D;
     public float summonVelocity;
     public float waitTime;
+
+    private Transform thisParent;
+
+    public Animator animator;
 	// Use this for initialization
 	void Start () {
         DisableThis();
+        thisParent = transform.parent;
 	}
 	
 	// Update is called once per frame
@@ -28,17 +33,34 @@ public class ApareceDelSuelo : MonoBehaviour {
         collider.enabled = false;
     }
 
-    public void SummonThis(){
-        
+    public void SummonThis(Vector3 startPoint){
+        thisParent.position = startPoint;
+        EnableThis();
+        animator.SetTrigger("Rise");
+    }
+    IEnumerator BackToEarth(){
+        yield return new WaitForSeconds(waitTime);
+        animator.SetTrigger("Back");
+    }
+
+    public void FinishThisAnimation(){
+        DisableThis();
+    }
+
+    public void ReturnToEarth(){
+        StartCoroutine(BackToEarth());
     }
 
 
+
     /*IEnumerator RiseFromEarth(Vector2 startPoint){
-        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,summonVelocity);
-        while(transform.localPosition.y<startPoint+3){
+        transform.position = new Vector2(rigidbody2D.velocity.x,summonVelocity);
+        Vector3 goal = new Vector3(startPoint.x, startPoint.y + 5, 0);
+        while(transform.position!=goal){
+            transform.position = Vector3.MoveTowards()
             yield return null;
         }
-        rigidbody2D.MovePosition(new Vector2(transform.parent.position) + Vector2.up*3);
+        rigidbody2D.MovePosition(new Vector2(startPoint) + Vector2.up*3);
         yield return new WaitForSeconds(waitTime);
     }*/
 }

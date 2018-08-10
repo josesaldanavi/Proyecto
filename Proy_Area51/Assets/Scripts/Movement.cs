@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     public float health = 10;
     public float maxHealth = 10;
 
+    public ApareceDelSuelo poderDelSuelo;
+
 
 
     public float rayDetectionDistance = 0.1f;
@@ -64,6 +66,8 @@ public class Movement : MonoBehaviour
             {
                 charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 isGrounded = false;
+            }else if(Input.GetKeyDown(KeyCode.W)){
+                SummonEarth(0);
             }
         }
         else
@@ -86,5 +90,10 @@ public class Movement : MonoBehaviour
         Gizmos.DrawSphere(rightNode, 0.2f);
         Gizmos.color = Color.white;
         Gizmos.DrawRay(leftNode, Vector3.down * rayDetectionDistance);
+    }
+
+    public void SummonEarth(float distance){
+        Vector3 startPoint = new Vector3(transform.position.x+distance, transform.position.y, transform.position.z);
+        poderDelSuelo.SummonThis(startPoint);
     }
 }
