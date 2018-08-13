@@ -1,28 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Button_Comenzar : MonoBehaviour {
+    public Animator anim;
+    public string escenas;
 
-    public Image fundido;
-    public string[] escenas;
-
-	void Start () {
-        fundido.CrossFadeAlpha(0, 0.5f, false);
-	}
-	
-    public void FadeOut(int s)
+    private void Update()
     {
-        fundido.CrossFadeAlpha(1, 0.5f, false);
-        StartCoroutine(CambioEscena(escenas[s]));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(CambioEscena());
+        }
     }
 
-    IEnumerator CambioEscena(string escena)
+    IEnumerator CambioEscena()
     {
+        anim.SetTrigger("Jugar");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(escena);
+        SceneManager.LoadScene(escenas);
     }
 
 }
