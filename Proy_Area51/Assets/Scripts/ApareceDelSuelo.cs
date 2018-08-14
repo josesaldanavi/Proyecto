@@ -8,6 +8,7 @@ public class ApareceDelSuelo : MonoBehaviour {
     //public Rigidbody2D rigidbody2D;
     public float summonVelocity;
     public float waitTime;
+    private bool canUse = true;
 
     private Transform thisParent;
 
@@ -34,9 +35,13 @@ public class ApareceDelSuelo : MonoBehaviour {
     }
 
     public void SummonThis(Vector3 startPoint){
-        thisParent.position = startPoint;
-        EnableThis();
-        animator.SetTrigger("Rise");
+        if(canUse){
+            canUse = false;
+            thisParent.position = startPoint;
+            EnableThis();
+            animator.SetTrigger("Rise");
+        }
+
     }
     IEnumerator BackToEarth(){
         yield return new WaitForSeconds(waitTime);
@@ -45,13 +50,16 @@ public class ApareceDelSuelo : MonoBehaviour {
 
     public void FinishThisAnimation(){
         DisableThis();
+        ReactivatePower();
     }
 
     public void ReturnToEarth(){
         StartCoroutine(BackToEarth());
     }
 
-
+    private void ReactivatePower(){
+        canUse = true;
+    }
 
     /*IEnumerator RiseFromEarth(Vector2 startPoint){
         transform.position = new Vector2(rigidbody2D.velocity.x,summonVelocity);
