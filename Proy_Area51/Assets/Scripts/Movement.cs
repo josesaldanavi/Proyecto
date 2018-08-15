@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
                 charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
                 isGrounded = false;
             }else if(Input.GetKeyDown(KeyCode.W)){
-                if(downLeft.collider.CompareTag("Ground")){
+                if(downLeft.collider&&downLeft.collider.CompareTag("Ground")){
                     SummonEarth(0); 
                 }
 
@@ -75,7 +75,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            if (downLeft || downRight)
+            if ((downLeft || downRight)&& charRigidbody2D.velocity.y == 0)
             {
                 isGrounded = true;
             }

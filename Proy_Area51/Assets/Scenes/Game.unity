@@ -181,7 +181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &78699491
 Transform:
   m_ObjectHideFlags: 0
@@ -709,11 +709,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charRigidbody2D: {fileID: 891147900}
   characterSpeed: 5
-  jumpSpeed: 10
-  health: 4
+  jumpSpeed: 5
+  health: 3.65
   maxHealth: 5
   poderDelSuelo: {fileID: 1890767628}
-  rayDetectionDistance: 0.1
+  rayDetectionDistance: 0.003
   isSpriteFacingLeft: 0
 --- !u!212 &891147902
 SpriteRenderer:
@@ -980,7 +980,7 @@ GameObject:
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
