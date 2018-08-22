@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour {
     public Image hpBar;
     public Movement playerScript;
     public Gradient barColors;
+    public int coinCounter;
+    public Text coinText;
 	// Use this for initialization
 	void Start () {
 		
@@ -23,5 +25,6 @@ public class UIManager : MonoBehaviour {
             Debug.Log(playerScript.normalizedHP);
 
         }
+        coinText.text = "Coins:" + coinCounter;
 	}
 }
