@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Poderes
+    uniqueID: 1108572461
+    locked: 0
   - name: Mundo
     uniqueID: 1510016231
     locked: 0

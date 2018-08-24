@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour {
             Debug.Log(playerScript.normalizedHP);
 
         }
+        if(coinText != null)
         coinText.text = "Coins:" + coinCounter;
 	}
 }

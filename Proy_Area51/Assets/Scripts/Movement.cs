@@ -10,8 +10,11 @@ public class Movement : MonoBehaviour
     public float health = 10;
     public float maxHealth = 10;
 
+    private bool isSealed;
+
     public ApareceDelSuelo poderDelSuelo;
 
+    public Animator animator2d;
 
 
     public float rayDetectionDistance = 0.1f;
@@ -33,53 +36,54 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        float horizontalSpeed = Input.GetAxis("Horizontal");
-        if (horizontalSpeed != 0)
-        {
-            charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
+        if (!isSealed){
+            float horizontalSpeed = Input.GetAxis("Horizontal");
+            if (horizontalSpeed != 0) {
+                //animator2d.SetInteger("moveState",0);
+                charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
+            }
+            else {
+                //animator2d.SetInteger("moveState",1);
+            }
+            if (horizontalSpeed < 0) {
+                if (spriteRenderer.flipX == isSpriteFacingLeft) { spriteRenderer.flipX = !isSpriteFacingLeft; }
+            }
+            else if (horizontalSpeed > 0) {
+                if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
+            }
         }
-        if (horizontalSpeed < 0)
-        {
-            if (spriteRenderer.flipX == isSpriteFacingLeft) { spriteRenderer.flipX = !isSpriteFacingLeft; }
-        }
-        else if (horizontalSpeed > 0)
-        {
-            if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
-        }
+        
 
     }
 
     private void FixedUpdate()
     {
+        if (!isSealed) {
+            RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
+            RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
 
-        RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
-        RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
-
-        if (isGrounded)
-        {
-            if (!downLeft && !downRight)
-            {
-                isGrounded = false;
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-                isGrounded = false;
-            }else if(Input.GetKeyDown(KeyCode.W)){
-                if(downLeft.collider&&downLeft.collider.CompareTag("Ground")){
-                    SummonEarth(0); 
+            if (isGrounded) {
+                if (!downLeft && !downRight) {
+                    isGrounded = false;
                 }
+                else if (Input.GetKeyDown(KeyCode.Space)) {
+                    charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                    isGrounded = false;
+                }
+                else if (Input.GetKeyDown(KeyCode.W)) {
+                    if (downLeft.collider && downLeft.collider.CompareTag("Ground")) {
+                        SummonEarth(0);
+                    }
 
+                }
+            }
+            else {
+                if ((downLeft || downRight) && charRigidbody2D.velocity.y == 0) {
+                    isGrounded = true;
+                }
             }
         }
-        else
-        {
-            if ((downLeft || downRight)&& charRigidbody2D.velocity.y == 0)
-            {
-                isGrounded = true;
-            }
-        }
+        
     }
 
     public void TakeDamage(int damage)
@@ -98,5 +102,14 @@ public class Movement : MonoBehaviour
     public void SummonEarth(float distance){
         Vector3 startPoint = new Vector3(transform.position.x+distance, transform.position.y, transform.position.z);
         poderDelSuelo.SummonThis(startPoint);
+    }
+    public void releaseFromCurse()
+    {
+        isSealed = false;
+    }
+
+    public void sealThis()
+    {
+        isSealed = true;
     }
 }
