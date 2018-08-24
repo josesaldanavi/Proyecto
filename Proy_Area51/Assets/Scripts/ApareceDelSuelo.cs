@@ -5,6 +5,7 @@ using UnityEngine;
 public class ApareceDelSuelo : MonoBehaviour {
     public SpriteRenderer spriterenderer;
     public Collider2D collider;
+    public ParticleSystem system;
     //public Rigidbody2D rigidbody2D;
     public float summonVelocity;
     public float waitTime;
@@ -30,6 +31,7 @@ public class ApareceDelSuelo : MonoBehaviour {
     }
     public void DisableThis()
     {
+        StopEmitting();
         spriterenderer.enabled = false;
         collider.enabled = false;
     }
@@ -40,16 +42,24 @@ public class ApareceDelSuelo : MonoBehaviour {
             thisParent.position = startPoint;
             EnableThis();
             animator.SetTrigger("Rise");
+
+            StartEmitting();
         }
 
     }
     IEnumerator BackToEarth(){
+        StopEmitting();
         yield return new WaitForSeconds(waitTime);
+        ParentParticleToThis();
+        StartEmitting();
         animator.SetTrigger("Back");
+
     }
 
     public void FinishThisAnimation(){
         DisableThis();
+        StopEmitting();
+        UnParentParticle();
         ReactivatePower();
     }
 
@@ -59,6 +69,25 @@ public class ApareceDelSuelo : MonoBehaviour {
 
     private void ReactivatePower(){
         canUse = true;
+    }
+    public void StartEmitting()
+    {
+        system.Play();
+    }
+    public void StopEmitting()
+    {
+        system.Stop();
+    }
+
+    private void ParentParticleToThis()
+    {
+        system.transform.SetParent(this.transform);
+        system.transform.localPosition=new Vector3(0,2.5f,0);
+    }
+    private void UnParentParticle()
+    {
+        system.transform.SetParent(this.transform.parent);
+        system.transform.localPosition = Vector3.zero;
     }
 
     /*IEnumerator RiseFromEarth(Vector2 startPoint){
