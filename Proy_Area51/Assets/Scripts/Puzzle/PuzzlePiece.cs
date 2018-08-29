@@ -7,12 +7,17 @@ class PuzzlePiece : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.localPosition = Vector3.zero;
+        //transform.localPosition = eventData.position;
     }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+    	//transform.position = eventData.position;
+    }
+
 }
 

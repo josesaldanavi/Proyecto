@@ -6,6 +6,7 @@ public class ApareceDelSuelo : MonoBehaviour {
     public SpriteRenderer spriterenderer;
     public Collider2D collider;
     public ParticleSystem system;
+    public ParticleSystem burstSystem;
     //public Rigidbody2D rigidbody2D;
     public float summonVelocity;
     public float waitTime;
@@ -44,6 +45,7 @@ public class ApareceDelSuelo : MonoBehaviour {
             animator.SetTrigger("Rise");
 
             StartEmitting();
+            PlayBurst();
         }
 
     }
@@ -51,7 +53,7 @@ public class ApareceDelSuelo : MonoBehaviour {
         StopEmitting();
         yield return new WaitForSeconds(waitTime);
         ParentParticleToThis();
-        StartEmitting();
+        //PlayBurst();
         animator.SetTrigger("Back");
 
     }
@@ -73,10 +75,14 @@ public class ApareceDelSuelo : MonoBehaviour {
     public void StartEmitting()
     {
         system.Play();
+
     }
     public void StopEmitting()
     {
         system.Stop();
+    }
+    public void PlayBurst(){
+    	burstSystem.Play();
     }
 
     private void ParentParticleToThis()
