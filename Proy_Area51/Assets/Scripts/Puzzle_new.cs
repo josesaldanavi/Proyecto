@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Puzzle_new : MonoBehaviour {
     public GameObject[] puzzle;
-    public float speed=0.1f;
+    public float speed = 0.1f;
     int i = 0;
     public bool aumenta = false;
     public GameObject PuzzleController;
     // Use this for initialization
-    void Start () {
-        puzzle[i].GetComponent<Transform>();
-	}
+    void Start()
+    {
+       
+    }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.W))
         {
             puzzle[i].transform.Translate(Vector2.up * speed * Time.deltaTime);
@@ -45,14 +47,14 @@ public class Puzzle_new : MonoBehaviour {
         {
             i++;
             aumenta = false;
-
+            
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other = PuzzleController.GetComponent<Collider2D>();
-        if (aumenta == false && other.tag=="Meta")
+        
+        if (aumenta == false && other.tag == "Meta")
         {
             puzzle[i].gameObject.transform.parent = PuzzleController.transform;
             aumenta = true;
