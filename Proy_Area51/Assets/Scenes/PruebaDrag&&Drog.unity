@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 2067251656}
   - component: {fileID: 2067251657}
   m_Layer: 0
-  m_Name: slot
+  m_Name: slot0
   m_TagString: Meta
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
