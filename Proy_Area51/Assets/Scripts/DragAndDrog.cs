@@ -39,6 +39,8 @@ public class DragAndDrog : MonoBehaviour {
             Vector3 trans = Vector3.zero;
             slotGO.transform.position =  trans;
             gameObject.transform.parent = slotGO.transform;
+            gameObject.SetActive(false);
+            
         }
     }
 
