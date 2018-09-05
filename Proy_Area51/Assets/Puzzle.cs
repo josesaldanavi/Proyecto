@@ -8,6 +8,7 @@ public class Puzzle : MonoBehaviour {
 	public Piece[] pieces;
 	private Transform slotContainer;
     public Text winText;
+    public Canvas canvas_puz;
 	// Use this for initialization
 
 
@@ -30,6 +31,8 @@ public class Puzzle : MonoBehaviour {
 		}
 		//Call what you want on puzzle complete here
         winText.enabled = true;
+        Movement.isPuzzleNotActive=false;
+        canvas_puz.enabled=false;
 		Debug.Log("YOU WIN!");
 	}
 }

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class TrampaConClick : MonoBehaviour {
     public int health = 10;
-    private Movement player;
+    public Movement player;
     public GameObject sealSprite;
+
+    public GameObject notPlayer;
 
     private bool isActiveAndReady;
 	// Use this for initialization
     void Awake()
     {
-        player = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Movement>();
+        /*Debug.Log("Object con tag",GameObject.FindGameObjectWithTag("Player").name);
+        player = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Movement>();*/
+        notPlayer=GameObject.FindGameObjectWithTag("Player");
+
     }
 
 	void Start () {

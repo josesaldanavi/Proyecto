@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     public float health = 10;
     public float maxHealth = 10;
 
+    public static bool isPuzzleNotActive;
+
     private bool isSealed;
 
     public ApareceDelSuelo poderDelSuelo;
@@ -29,21 +31,21 @@ public class Movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+    	isPuzzleNotActive = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isSealed){
+        if (!isSealed &&  !isPuzzleNotActive){
             float horizontalSpeed = Input.GetAxis("Horizontal");
             if (horizontalSpeed != 0) {
-                //animator2d.SetInteger("moveState",0);
+                animator2d.SetInteger("Speed2",1);
                 charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
             }
             else {
-                //animator2d.SetInteger("moveState",1);
+                animator2d.SetInteger("Speed2",0);
             }
             if (horizontalSpeed < 0) {
                 if (spriteRenderer.flipX == isSpriteFacingLeft) { spriteRenderer.flipX = !isSpriteFacingLeft; }
@@ -51,14 +53,15 @@ public class Movement : MonoBehaviour
             else if (horizontalSpeed > 0) {
                 if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
             }
+        }else{
+        	charRigidbody2D.velocity=Vector2.zero;
         }
-        
 
     }
 
     private void FixedUpdate()
     {
-        if (!isSealed) {
+        if (!isSealed && !isPuzzleNotActive) {
             RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
             RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
 
@@ -112,4 +115,8 @@ public class Movement : MonoBehaviour
     {
         isSealed = true;
     }
+    /*public static void stopMovement(){
+    	isPuzzleNotActive=true;
+    	charRigidbody2D.velocity =Vector2.zero;
+    }*/
 }
