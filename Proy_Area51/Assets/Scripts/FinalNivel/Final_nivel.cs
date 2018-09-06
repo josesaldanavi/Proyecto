@@ -7,7 +7,7 @@ public class Final_nivel : MonoBehaviour {
     public Canvas canvas_fin;
     public Text txt_coin;
     public Text qOro;
-    int puntosTotal;
+    public int puntosTotal;
 	// Use this for initialization
 	void Start () {
         canvas_fin.enabled = false;
