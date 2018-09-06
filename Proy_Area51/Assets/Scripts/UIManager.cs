@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
     public Image hpBar;
     public Movement playerScript;
     public Gradient barColors;
-    public int coinCounter;
+    public static int coinCounter;
     public Text coinText;
 	// Use this for initialization
 	void Start () {

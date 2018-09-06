@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coins : MonoBehaviour {
 
     public bool agarro;
-    public UIManager manager;
+   // public UIManager manager;
 	// Use this for initialization
 	void Start () {
 
@@ -24,9 +24,9 @@ public class Coins : MonoBehaviour {
             if (agarro)
             {
                 Destroy(gameObject);
-                manager.coinCounter++;
+                UIManager.coinCounter++;
             }
-            Debug.Log(manager.coinCounter);
+            Debug.Log(UIManager.coinCounter);
         }
     }
 }
