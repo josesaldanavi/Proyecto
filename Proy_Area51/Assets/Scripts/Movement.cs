@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
             float horizontalSpeed = Input.GetAxis("Horizontal");
             if (horizontalSpeed != 0) {
                 animator2d.SetInteger("Speed2",1);
-                charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
+                
             }
             else {
                 animator2d.SetInteger("Speed2",0);
@@ -55,7 +55,9 @@ public class Movement : MonoBehaviour
             else if (horizontalSpeed > 0) {
                 if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
             }
-        }else{
+            charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
+        }
+        else{
         	charRigidbody2D.velocity=new Vector2(0f, charRigidbody2D.velocity.y);
         }
 

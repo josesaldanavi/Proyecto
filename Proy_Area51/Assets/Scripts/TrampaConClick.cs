@@ -42,6 +42,10 @@ public class TrampaConClick : MonoBehaviour
             TakeDamage();
             camera.speed = 5;
             camera.impulseDirection = GetRandomDirection();
+
+            //Aqui va la animacion
+
+
             if (health == 0)
             {
                 print("Destroyed!");
