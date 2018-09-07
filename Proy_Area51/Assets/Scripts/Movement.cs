@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     public float health = 10;
     public float maxHealth = 10;
 
+    public GameObject personalSealImage;
+
     public static bool isPuzzleNotActive;
 
     private bool isSealed;
@@ -54,7 +56,7 @@ public class Movement : MonoBehaviour
                 if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
             }
         }else{
-        	charRigidbody2D.velocity=Vector2.zero;
+        	charRigidbody2D.velocity=new Vector2(0f, charRigidbody2D.velocity.y);
         }
 
     }
@@ -92,6 +94,13 @@ public class Movement : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+
+        health=Mathf.Clamp(health, 0f, maxHealth);
+        if (health == 0&& !isPuzzleNotActive)
+        {
+            personalSealImage.SetActive(true);
+            isPuzzleNotActive = true;
+        }
     }
 
     void OnDrawGizmos()
