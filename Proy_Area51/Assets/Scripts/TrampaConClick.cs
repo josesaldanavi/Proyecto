@@ -41,8 +41,7 @@ public class TrampaConClick : MonoBehaviour
         {
             TakeDamage();
             camera.speed = 5;
-            camera.impulseDirection = GetRandomDirection(360);
-            camera.impulseDirection = Vector3.up;
+            camera.impulseDirection = GetRandomDirection();
             if (health == 0)
             {
                 print("Destroyed!");
@@ -72,11 +71,9 @@ public class TrampaConClick : MonoBehaviour
 
     }
 
-    Vector3 GetRandomDirection(float maxAngle)
+    Vector3 GetRandomDirection()
     {
-        float randomAngle = Random.Range(0f, maxAngle);
-        Quaternion quat = Quaternion.Euler(new Vector3(0, 0, randomAngle));
-        return quat * Vector3.forward;
+        return ((new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f),0)).normalized);
     }
 }
 
