@@ -1134,6 +1134,7 @@ MonoBehaviour:
   sealSprite: {fileID: 1575950109}
   notPlayer: {fileID: 0}
   camera: {fileID: 519420030}
+  rockObject: {fileID: 648032731}
 --- !u!1 &268035088
 GameObject:
   m_ObjectHideFlags: 0

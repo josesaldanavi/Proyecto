@@ -12,6 +12,9 @@ public class TrampaConClick : MonoBehaviour
     private bool isActiveAndReady;
 
     public CamMovement camera;
+
+    public GameObject rockObject;
+    private Animator rockAnimator;
     // Use this for initialization
     void Awake()
     {
@@ -26,7 +29,7 @@ public class TrampaConClick : MonoBehaviour
         //Por ahora va a activarse cuando comienza.
         //Cambiar logica si se desea utilizarlo diferente despues.
         Activate();
-
+        rockAnimator=rockObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,10 +47,11 @@ public class TrampaConClick : MonoBehaviour
             camera.impulseDirection = GetRandomDirection();
 
             //Aqui va la animacion
-
+            rockAnimator.SetTrigger("Play");
 
             if (health == 0)
             {
+                rockObject.SetActive(false);
                 print("Destroyed!");
                 player.releaseFromCurse();
                 DestroyThis();
