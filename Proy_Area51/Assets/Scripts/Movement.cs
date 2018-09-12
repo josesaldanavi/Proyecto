@@ -30,6 +30,8 @@ public class Movement : MonoBehaviour
 
 
     public bool isSpriteFacingLeft = false;
+
+    public GameOverScript gameOverObject;
     // Use this for initialization
     void Start()
     {
@@ -59,6 +61,7 @@ public class Movement : MonoBehaviour
         }
         else{
         	charRigidbody2D.velocity=new Vector2(0f, charRigidbody2D.velocity.y);
+            animator2d.SetInteger("Speed2",0);
         }
 
     }
@@ -95,14 +98,33 @@ public class Movement : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        
 
-        health=Mathf.Clamp(health, 0f, maxHealth);
-        if (health == 0&& !isPuzzleNotActive)
+        //health -= damage;
+
+        //health=Mathf.Clamp(health, 0f, maxHealth);
+
+        //if (health == 0 && !isPuzzleNotActive)
+        //{
+        //    personalSealImage.SetActive(true);
+        //    isPuzzleNotActive = true;
+        //}
+
+        if (!isPuzzleNotActive)
         {
-            personalSealImage.SetActive(true);
-            isPuzzleNotActive = true;
+            health -= damage;
+
+            health = Mathf.Clamp(health, 0f, maxHealth);
+            if (health == 0)
+            {
+                personalSealImage.SetActive(true);
+                isPuzzleNotActive = true;
+                gameOverObject.playGameOver();
+
+            }
         }
+
+        
     }
 
     void OnDrawGizmos()
@@ -130,4 +152,9 @@ public class Movement : MonoBehaviour
     	isPuzzleNotActive=true;
     	charRigidbody2D.velocity =Vector2.zero;
     }*/
+    public void renderFrontOfEverything()
+    {
+        spriteRenderer.material.renderQueue = 4001;
+    }
+
 }

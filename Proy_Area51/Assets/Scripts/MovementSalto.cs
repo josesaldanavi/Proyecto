@@ -45,7 +45,7 @@ public class MovementSalto : MonoBehaviour {
 
             }
         }
-        if(isAttacking){
+        if(isAttacking&&!Movement.isPuzzleNotActive){
             JumpAttack();
         }
 	}
@@ -54,5 +54,11 @@ public class MovementSalto : MonoBehaviour {
         float distanceToPlayer = player.position.x-transform.position.x;
         Debug.Log(distanceToPlayer / 2);
         Jump(Mathf.Clamp(distanceToPlayer / 2,-maxJumpHorizontal,maxJumpHorizontal));
+    }
+    public void JumpBack()
+    {
+        float distanceToPlayer = player.position.x - transform.position.x;
+        Debug.Log(distanceToPlayer / 2);
+        Jump(Mathf.Clamp(distanceToPlayer / 2, -maxJumpHorizontal, maxJumpHorizontal));
     }
 }

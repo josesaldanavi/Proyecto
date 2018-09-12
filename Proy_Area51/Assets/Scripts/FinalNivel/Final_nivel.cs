@@ -24,6 +24,7 @@ public class Final_nivel : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            Movement.isPuzzleNotActive = true;
             Debug.Log("Entro");
             canvas_fin.enabled = true;
         }
