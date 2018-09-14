@@ -21,30 +21,55 @@ public class MovementSaltoV2 : MonoBehaviour {
     public float patrolSpeed=1f;
 
     public SpriteRenderer renderer;
-	// Use this for initialization
-	void Start () {
-		
+    private bool isGrounded = true;
+
+
+    Vector3 leftNode { get { return transform.position - new Vector3(0.5f, 1, 0); } }
+    Vector3 rightNode { get { return transform.position + new Vector3(0.5f, -1, 0); } }
+    public float rayDetectionDistance = 0.1f;
+
+    public Animator anim2D;
+    // Use this for initialization
+    void Start () {
+		if(points.Length != 0){
+            Debug.Log("Lenght is : " + points.Length);
+            anim2D.SetInteger("MoveState", 3);
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //Corregir despues
-        if (points.Length!=0 &&!isAttacking)
-        {
-            float distanceToPlayer = points[actualTarget].position.x - transform.position.x;
+        
+        if (!isAttacking) {
+            if (points.Length != 0) {
 
-            if (Mathf.Abs(distanceToPlayer) < 0.1f)
-            {
-                actualTarget += 1;
-                if (actualTarget == points.Length)
-                {
-                    actualTarget = 0;
+                float distanceToPlayer = points[actualTarget].position.x - transform.position.x;
+                renderer.flipX = distanceToPlayer > 0;
+
+                if (Mathf.Abs(distanceToPlayer) < 0.1f) {
+                    actualTarget += 1;
+                    if (actualTarget == points.Length) {
+                        actualTarget = 0;
+                    }
                 }
-            }
-            renderer.flipX = distanceToPlayer>0;
-            charRigidbody2D.velocity = new Vector2(Mathf.Sign(distanceToPlayer)* patrolSpeed, charRigidbody2D.velocity.y);
+                
+                charRigidbody2D.velocity = new Vector2(Mathf.Sign(distanceToPlayer) * patrolSpeed, charRigidbody2D.velocity.y);
 
+            }
+        } else {
+            float distanceToPlayer = player.position.x - transform.position.x;
+            renderer.flipX = distanceToPlayer > 0;
+            RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
+            RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
+            isGrounded =!(!downLeft && !downRight);
+            if (isGrounded){
+                anim2D.SetInteger("MoveState", 1);
+            } else{
+                anim2D.SetInteger("MoveState", 2);
+            }
         }
+
 
 	}
 
