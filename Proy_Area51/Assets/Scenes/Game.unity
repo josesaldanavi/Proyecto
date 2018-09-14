@@ -8248,6 +8248,7 @@ MonoBehaviour:
   rayDetectionDistance: 0.003
   isSpriteFacingLeft: 0
   gameOverObject: {fileID: 1238559320}
+  isSummoning: 0
 --- !u!212 &891147902
 SpriteRenderer:
   m_ObjectHideFlags: 0

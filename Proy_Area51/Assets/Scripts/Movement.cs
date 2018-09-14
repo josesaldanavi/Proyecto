@@ -33,6 +33,9 @@ public class Movement : MonoBehaviour
     public bool isSpriteFacingLeft = false;
 
     public GameOverScript gameOverObject;
+
+
+    public bool isSummoning=false;
     // Use this for initialization
     void Start()
     {
@@ -88,9 +91,9 @@ public class Movement : MonoBehaviour
 
                 }else if (Input.GetKeyDown(KeyCode.E)) {
                     if (downLeft.collider && downLeft.collider.CompareTag("Ground")) {
-                        
+                        StartSummoning();
 
-                        SummonSpike((spriteRenderer.flipX)?-1:1);
+
                     }
                 }
             }
@@ -169,6 +172,17 @@ public class Movement : MonoBehaviour
     public void renderFrontOfEverything()
     {
         spriteRenderer.material.renderQueue = 4001;
+    }
+
+    private void StartSummoning() {
+        isSummoning = true;
+        animator2d.SetInteger("Speed2", 2);
+    }
+
+    public void summonSpikeNow() {
+        
+        SummonSpike((spriteRenderer.flipX) ? -1 : 1);
+        isSummoning = false;
     }
 
 }
