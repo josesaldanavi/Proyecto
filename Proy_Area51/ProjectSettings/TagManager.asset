@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - platform
   - Meta
+  - Slot
+  - Enemy
   layers:
   - Default
   - TransparentFX

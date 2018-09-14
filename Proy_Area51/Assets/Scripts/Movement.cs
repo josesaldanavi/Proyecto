@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     private bool isSealed;
 
     public ApareceDelSuelo poderDelSuelo;
+    public PoderDePuas poderDePuas;
 
     public Animator animator2d;
 
@@ -85,6 +86,12 @@ public class Movement : MonoBehaviour
                         SummonEarth(0);
                     }
 
+                }else if (Input.GetKeyDown(KeyCode.E)) {
+                    if (downLeft.collider && downLeft.collider.CompareTag("Ground")) {
+                        
+
+                        SummonSpike((spriteRenderer.flipX)?-1:1);
+                    }
                 }
             }
             else {
@@ -139,6 +146,13 @@ public class Movement : MonoBehaviour
         Vector3 startPoint = new Vector3(transform.position.x+distance, transform.position.y, transform.position.z);
         poderDelSuelo.SummonThis(startPoint);
     }
+
+    public void SummonSpike(float distance) {
+        Vector3 startPoint = new Vector3(transform.position.x + distance, transform.position.y, transform.position.z);
+        poderDePuas.SummonThis(startPoint);
+    }
+
+
     public void releaseFromCurse()
     {
         isSealed = false;

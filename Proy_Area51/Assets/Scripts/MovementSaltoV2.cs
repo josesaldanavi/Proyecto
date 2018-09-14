@@ -17,6 +17,10 @@ public class MovementSaltoV2 : MonoBehaviour {
     int actualTarget = 0;
 
     public Transform[] points;
+
+    public float patrolSpeed=1f;
+
+    public SpriteRenderer renderer;
 	// Use this for initialization
 	void Start () {
 		
@@ -25,19 +29,20 @@ public class MovementSaltoV2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Corregir despues
-        if (!isAttacking)
+        if (points.Length!=0 &&!isAttacking)
         {
             float distanceToPlayer = points[actualTarget].position.x - transform.position.x;
 
             if (Mathf.Abs(distanceToPlayer) < 0.1f)
             {
                 actualTarget += 1;
-                if (actualTarget == 1)
+                if (actualTarget == points.Length)
                 {
                     actualTarget = 0;
                 }
             }
-            charRigidbody2D.velocity = new Vector2(Mathf.Sign(distanceToPlayer)*1f, charRigidbody2D.velocity.y);
+            renderer.flipX = distanceToPlayer>0;
+            charRigidbody2D.velocity = new Vector2(Mathf.Sign(distanceToPlayer)* patrolSpeed, charRigidbody2D.velocity.y);
 
         }
 
