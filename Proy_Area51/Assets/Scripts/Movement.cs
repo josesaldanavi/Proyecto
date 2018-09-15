@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     Vector3 leftNode { get { return transform.position - new Vector3(0.5f, 1, 0); } }
     Vector3 rightNode { get { return transform.position + new Vector3(0.5f, -1, 0); } }
     bool isGrounded;
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
 
     public bool isSpriteFacingLeft = false;
@@ -40,69 +40,91 @@ public class Movement : MonoBehaviour
     void Start()
     {
     	isPuzzleNotActive = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isSealed &&  !isPuzzleNotActive){
-            float horizontalSpeed = Input.GetAxis("Horizontal");
-            if (horizontalSpeed != 0) {
-                animator2d.SetInteger("Speed2",1);
-                
-            }
-            else {
-                animator2d.SetInteger("Speed2",0);
-            }
-            if (horizontalSpeed < 0) {
-                if (spriteRenderer.flipX == isSpriteFacingLeft) { spriteRenderer.flipX = !isSpriteFacingLeft; }
-            }
-            else if (horizontalSpeed > 0) {
-                if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
-            }
-            charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
-        }
-        else{
-        	charRigidbody2D.velocity=new Vector2(0f, charRigidbody2D.velocity.y);
-            animator2d.SetInteger("Speed2",0);
-        }
+        
+        if (!isSealed && !isPuzzleNotActive&&!isSummoning)
+            {
+                float horizontalSpeed = Input.GetAxis("Horizontal");
+                if (horizontalSpeed != 0)
+                {
+                    animator2d.SetInteger("Speed2", 1);
 
+                }
+                else
+                {
+                    animator2d.SetInteger("Speed2", 0);
+                }
+                if (horizontalSpeed < 0)
+                {
+                    if (spriteRenderer.flipX == isSpriteFacingLeft) { spriteRenderer.flipX = !isSpriteFacingLeft; }
+                }
+                else if (horizontalSpeed > 0)
+                {
+                    if (spriteRenderer.flipX == !isSpriteFacingLeft) { spriteRenderer.flipX = isSpriteFacingLeft; }
+                }
+                charRigidbody2D.velocity = new Vector2(horizontalSpeed * characterSpeed, charRigidbody2D.velocity.y);
+            }
+            else
+            {
+                
+                charRigidbody2D.velocity = new Vector2(0f, charRigidbody2D.velocity.y);
+                if (!isSummoning)
+                animator2d.SetInteger("Speed2", 0);
+            }
+        
+       
     }
 
     private void FixedUpdate()
     {
-        if (!isSealed && !isPuzzleNotActive) {
-            RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
-            RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
+        
+        if (!isSealed && !isPuzzleNotActive&&!isSummoning)
+            {
+                RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
+                RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
 
-            if (isGrounded) {
-                if (!downLeft && !downRight) {
-                    isGrounded = false;
-                }
-                else if (Input.GetKeyDown(KeyCode.Space)) {
-                    charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-                    isGrounded = false;
-                }
-                else if (Input.GetKeyDown(KeyCode.W)) {
-                    if (downLeft.collider && downLeft.collider.CompareTag("Ground")) {
-                        SummonEarth(0);
+                if (isGrounded)
+                {
+                    if (!downLeft && !downRight)
+                    {
+                        isGrounded = false;
                     }
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                        isGrounded = false;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.W))
+                    {
+                        if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
+                        {
+                            SummonEarth(0);
+                        }
 
-                }else if (Input.GetKeyDown(KeyCode.E)) {
-                    if (downLeft.collider && downLeft.collider.CompareTag("Ground")) {
-                        StartSummoning();
+                    }
+                    else if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
+                        {
+                            StartSummoning();
 
 
+                        }
+                    }
+                }
+                else
+                {
+                    if ((downLeft || downRight) && charRigidbody2D.velocity.y == 0)
+                    {
+                        isGrounded = true;
                     }
                 }
             }
-            else {
-                if ((downLeft || downRight) && charRigidbody2D.velocity.y == 0) {
-                    isGrounded = true;
-                }
-            }
-        }
         
     }
 
