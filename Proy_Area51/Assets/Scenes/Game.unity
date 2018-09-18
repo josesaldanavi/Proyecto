@@ -9918,6 +9918,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1121849012292176, guid: cd65bead4922efb43aabe9ad7c6137a6, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223275192335788134, guid: cd65bead4922efb43aabe9ad7c6137a6,
+        type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10946,6 +10951,11 @@ Prefab:
       propertyPath: canvas_puz
       value: 
       objectReference: {fileID: 742173747}
+    - target: {fileID: 114011680758176440, guid: 2623b2a46d0dd2341ac651d1b64c3566,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2623b2a46d0dd2341ac651d1b64c3566, type: 2}
   m_IsPrefabParent: 0
@@ -24684,7 +24694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1590086929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24717,7 +24727,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1590086928}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
