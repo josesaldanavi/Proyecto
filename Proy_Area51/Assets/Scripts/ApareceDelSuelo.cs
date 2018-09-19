@@ -14,6 +14,7 @@ public class ApareceDelSuelo : MonoBehaviour {
 
     private Transform thisParent;
 
+    private Vector2 startPointThis;
     public Animator animator;
 	// Use this for initialization
 	void Start () {
@@ -42,19 +43,23 @@ public class ApareceDelSuelo : MonoBehaviour {
             canUse = false;
             thisParent.position = startPoint;
             EnableThis();
-            animator.SetTrigger("Rise");
+            startPointThis = startPoint;
+            StartCoroutine(RiseFromEarth(startPoint));
+            //animator.SetTrigger("Rise");
 
             StartEmitting();
             PlayBurst();
         }
 
     }
-    IEnumerator BackToEarth(){
+    IEnumerator WaitAndReturn(){
         StopEmitting();
         yield return new WaitForSeconds(waitTime);
         ParentParticleToThis();
         //PlayBurst();
-        animator.SetTrigger("Back");
+        //animator.SetTrigger("Back");
+        yield return StartCoroutine(BackToEarth(startPointThis));
+        Debug.Log("Ahora a bajar");
 
     }
 
@@ -65,9 +70,9 @@ public class ApareceDelSuelo : MonoBehaviour {
         ReactivatePower();
     }
 
-    public void ReturnToEarth(){
-        StartCoroutine(BackToEarth());
-    }
+    //public void ReturnToEarth(){
+    //    StartCoroutine(BackToEarth());
+    //}
 
     private void ReactivatePower(){
         canUse = true;
@@ -96,14 +101,46 @@ public class ApareceDelSuelo : MonoBehaviour {
         system.transform.localPosition = Vector3.zero;
     }
 
-    /*IEnumerator RiseFromEarth(Vector2 startPoint){
-        transform.position = new Vector2(rigidbody2D.velocity.x,summonVelocity);
-        Vector3 goal = new Vector3(startPoint.x, startPoint.y + 5, 0);
+    IEnumerator RiseFromEarth(Vector2 startPoint){
+        //transform.position = new Vector2(rigidbody2D.velocity.x,summonVelocity);
+
+        Vector3 goal = new Vector3(startPoint.x, startPoint.y + 1f, 0);
         while(transform.position!=goal){
-            transform.position = Vector3.MoveTowards()
+            //transform.Translate(Vector3.up*Time.deltaTime);
+            if(Input.GetKeyUp(KeyCode.W)){
+                StartCoroutine(WaitAndReturn());
+                yield break;
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, goal, Time.deltaTime);
+            //Debug.Log(goal);
+
+            //Debug.Log("transform"+transform.position);
             yield return null;
         }
-        rigidbody2D.MovePosition(new Vector2(startPoint) + Vector2.up*3);
-        yield return new WaitForSeconds(waitTime);
-    }*/
+        //Debug.Log("fin!");
+        //rigidbody2D.MovePosition(new Vector2(startPoint) + Vector2.up*3);
+        //yield return new WaitForSeconds(waitTime);
+    }
+
+    IEnumerator BackToEarth(Vector2 startPoint)
+    {
+        //transform.position = new Vector2(rigidbody2D.velocity.x,summonVelocity);
+
+        Vector3 goal = new Vector3(startPoint.x, startPoint.y, 0);
+        while (transform.position != goal)
+        {
+            //transform.Translate(Vector3.up*Time.deltaTime);
+
+
+            transform.position = Vector3.MoveTowards(transform.position, goal, Time.deltaTime);
+            //Debug.Log(goal);
+
+            //Debug.Log("transform"+transform.position);
+            yield return null;
+        }
+        //Debug.Log("fin!");
+        //rigidbody2D.MovePosition(new Vector2(startPoint) + Vector2.up*3);
+        //yield return new WaitForSeconds(waitTime);
+    }
 }
