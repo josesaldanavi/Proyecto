@@ -14,10 +14,14 @@ public class CamMovement : MonoBehaviour
     float deaccel = 45;
     public Vector3 impulseDirection;
 
+    Vector3 notClampedPosition;
+
+    public Vector2 verticalLimit = new Vector2(0, 30);
+    public Vector2 horizontalLimit = new Vector2(0, 100);
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -36,9 +40,15 @@ public class CamMovement : MonoBehaviour
         targetCamPos.z = transform.position.z;
         float currentDistance = Vector3.Distance(currentCamPos, targetCamPos);
 
-        transform.Translate(impulseDirection * speed * Time.deltaTime);
+        notClampedPosition = transform.position + impulseDirection * speed * Time.deltaTime;
 
-        transform.position = Vector3.MoveTowards(transform.position, targetCamPos, maxDistanceDelta * currentDistance * Time.deltaTime);
+
+
+        //notClampedTransform.Translate(impulseDirection * speed * Time.deltaTime);
+
+        notClampedPosition = Vector3.MoveTowards(notClampedPosition, targetCamPos, maxDistanceDelta * currentDistance * Time.deltaTime);
+
+        transform.position = new Vector3(Mathf.Clamp(notClampedPosition.x, horizontalLimit.x, horizontalLimit.y), Mathf.Clamp(notClampedPosition.y, verticalLimit.x, verticalLimit.y), -10);
     }
 
     /*void OnDrawGizmos()
