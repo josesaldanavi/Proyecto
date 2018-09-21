@@ -19,6 +19,8 @@ public class Movement : MonoBehaviour
     public ApareceDelSuelo poderDelSuelo;
     public PoderDePuas poderDePuas;
 
+    public static bool activarPoder_Murralla=false;
+    public static bool activarPoder_pua = false;
     public Animator animator2d;
 
 
@@ -103,6 +105,7 @@ public class Movement : MonoBehaviour
                     {
                         if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                         {
+                            if(activarPoder_Murralla)
                             SummonEarth(0);
                         }
 
@@ -111,6 +114,7 @@ public class Movement : MonoBehaviour
                     {
                         if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                         {
+                            if(activarPoder_pua)
                             StartSummoning();
 
 

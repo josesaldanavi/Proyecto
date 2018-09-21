@@ -15,6 +15,7 @@ public class TrampaConClick : MonoBehaviour
 
     public GameObject rockObject;
     private Animator rockAnimator;
+    public Animator oro;
     // Use this for initialization
     void Awake()
     {
@@ -68,6 +69,7 @@ public class TrampaConClick : MonoBehaviour
     }
     private void DestroyThis()
     {
+        oro.SetTrigger("Activar");
         Destroy(gameObject);
         Destroy(sealSprite);
     }

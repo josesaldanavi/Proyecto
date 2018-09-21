@@ -28,11 +28,14 @@ public class Movement_Platform : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (target != null)
-        {
-            float fixeUpdate = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, target.position, fixeUpdate);
+        if(Input.GetKey(KeyCode.N)){
+            if (target != null)
+            {
+                float fixeUpdate = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, fixeUpdate);
+            }
         }
+
         if (transform.position == target.position)
         {
             //operador ternario "?"

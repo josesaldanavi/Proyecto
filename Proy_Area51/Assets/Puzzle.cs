@@ -33,6 +33,7 @@ public class Puzzle : MonoBehaviour {
         winText.enabled = true;
         Movement.isPuzzleNotActive=false;
         canvas_puz.enabled=false;
+        Movement.activarPoder_Murralla = true;
 		Debug.Log("YOU WIN!");
 	}
 }
