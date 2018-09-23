@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrampaEncerrado : MonoBehaviour {
-    public int health=20;
+    public  int health=20;
 	// Use this for initialization
 	void Start () {
 		

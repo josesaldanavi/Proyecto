@@ -9,6 +9,13 @@ public class TrampaConClick : MonoBehaviour
     public GameObject sealSprite;
     public GameObject notPlayer;
 
+    public ParticleSystem piedra;
+    public ParticleSystem piedra1;
+    public ParticleSystem piedra2;
+    ParticleSystem.EmissionModule piedraRate;
+    ParticleSystem.EmissionModule piedraRate1;
+    ParticleSystem.EmissionModule piedraRate2;
+    float cont = 0.2f;
     private bool isActiveAndReady;
 
     public CamMovement camera;
@@ -31,6 +38,9 @@ public class TrampaConClick : MonoBehaviour
         //Cambiar logica si se desea utilizarlo diferente despues.
         Activate();
         rockAnimator=rockObject.GetComponent<Animator>();
+        piedraRate = piedra.emission;
+        piedraRate1 = piedra1.emission;
+        piedraRate2 = piedra2.emission;
     }
 
     // Update is called once per frame
@@ -46,19 +56,21 @@ public class TrampaConClick : MonoBehaviour
             TakeDamage();
             camera.speed = 5;
             camera.impulseDirection = GetRandomDirection();
-
             //Aqui va la animacion
-            rockAnimator.SetTrigger("Play");
-
+            //rockAnimator.SetTrigger("Play");
+            GetValue();
+            SetValue();
+            print("Falta hacer click " + health + " vece(s)");
             if (health == 0)
             {
                 rockObject.SetActive(false);
                 print("Destroyed!");
                 player.releaseFromCurse();
+                piedra.Stop();
+                piedra1.Stop();
+                piedra2.Stop();
                 DestroyThis();
             }
-
-            print("Falta hacer click " + health + " vece(s)");
         }
         //Debug.Log("Mouse is over GameObject.");
     }
@@ -85,5 +97,24 @@ public class TrampaConClick : MonoBehaviour
     {
         return ((new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f),0)).normalized);
     }
+
+    public void GetValue()
+    {
+        Debug.Log("The constant value is " + piedraRate.rateOverTime.constant);
+    }
+    public void SetValue()
+    {
+        piedra.Play();
+        piedra1.Play();
+        piedra2.Play();
+        for (int i = 0; i < health; i++)
+        {
+            piedraRate.rateOverTime = cont/8;
+            piedraRate1.rateOverTime = cont/8;
+            piedraRate2.rateOverTime = cont/8;
+            cont++;
+        }
+    }
+   
 }
 
