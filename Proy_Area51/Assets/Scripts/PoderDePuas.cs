@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoderDePuas : MonoBehaviour {
+public class PoderDePuas : MonoBehaviour
+{
     public SpriteRenderer spriterenderer;
     public Collider2D collider;
 
@@ -18,21 +19,24 @@ public class PoderDePuas : MonoBehaviour {
 
     public Animator animator;
 
-    Transform monsterStabbed;
+    List<Enemy> enemyStabbedList = new List<Enemy>();
 
-    bool isStabbingAMonster=false;
-	// Use this for initialization
-	void Start () {
+    bool isStabbingAMonster = false;
+    // Use this for initialization
+    void Start()
+    {
         DisableThis();
         thisParent = transform.parent;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 
-    public void EnableThis(){
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void EnableThis()
+    {
         spriterenderer.enabled = true;
         collider.enabled = true;
     }
@@ -43,8 +47,10 @@ public class PoderDePuas : MonoBehaviour {
         collider.enabled = false;
     }
 
-    public void SummonThis(Vector3 startPoint){
-        if(canUse){
+    public void SummonThis(Vector3 startPoint)
+    {
+        if (canUse)
+        {
             canUse = false;
             stabCollider.enabled = true;
             thisParent.position = startPoint;
@@ -56,7 +62,8 @@ public class PoderDePuas : MonoBehaviour {
         }
 
     }
-    IEnumerator BackToEarth(){
+    IEnumerator BackToEarth()
+    {
         //StopEmitting();
         yield return new WaitForSeconds(waitTime);
         //ParentParticleToThis();
@@ -65,18 +72,21 @@ public class PoderDePuas : MonoBehaviour {
 
     }
 
-    public void FinishThisAnimation(){
+    public void FinishThisAnimation()
+    {
         DisableThis();
         //StopEmitting();
         //UnParentParticle();
         ReactivatePower();
     }
 
-    public void ReturnToEarth(){
+    public void ReturnToEarth()
+    {
         StartCoroutine(BackToEarth());
     }
 
-    private void ReactivatePower(){
+    private void ReactivatePower()
+    {
         canUse = true;
     }
     //public void StartEmitting()
@@ -89,7 +99,7 @@ public class PoderDePuas : MonoBehaviour {
     //    system.Stop();
     //}
     //public void PlayBurst(){
-    //	burstSystem.Play();
+    //  burstSystem.Play();
     //}
 
     //private void ParentParticleToThis()
@@ -114,27 +124,50 @@ public class PoderDePuas : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
     }*/
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.CompareTag("Enemy")&&!isStabbingAMonster){
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Enemy") && col.transform.parent != transform)
+        {
             StabMonster(col.transform);
         }
     }
 
-    void StabMonster(Transform monster) {
+    void StabMonster(Transform monster)
+    {
         isStabbingAMonster = true;
-        monster.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        monsterStabbed = monster;
-        monster.SetParent(transform);
+        //monster.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
+        Enemy enemy = monster.GetComponent<Enemy>();
+
+        enemy.StabThis(transform);
+
+        enemyStabbedList.Add(enemy);
+        //monsterStabbed = monster;
+        //monster.SetParent(transform);
     }
-    public void UnStabMonster() {
-        stabCollider.enabled = false;
-        isStabbingAMonster = false;
-        if (monsterStabbed != null) {
+    public void UnStabMonster(Enemy monsterStabbed)
+    {
+        if (monsterStabbed != null)
+            monsterStabbed.GetComponent<Enemy>().UnstabThis();
+        //stabCollider.enabled = false;
+        //isStabbingAMonster = false;
+        /*if (monsterStabbed != null) {
             monsterStabbed.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             monsterStabbed.SetParent(null);
             monsterStabbed = null;
+        }*/
+
+    }
+
+    public void UnStabAllMonsters()
+    {
+        stabCollider.enabled = false;
+        int count = enemyStabbedList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            UnStabMonster(enemyStabbedList[i]);
         }
-        
+        enemyStabbedList.Clear();
     }
 
 

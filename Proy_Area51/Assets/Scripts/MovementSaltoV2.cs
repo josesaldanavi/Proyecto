@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementSaltoV2 : MonoBehaviour {
-    public Rigidbody2D charRigidbody2D;
+public class MovementSaltoV2 : Enemy
+{
+
     public float characterSpeed;
-    public float jumpSpeed=10;
+    public float jumpSpeed = 10;
     public float distance = -1f;
     public int attack = 1;
     public float maxJumpHorizontal = 5f;
@@ -18,7 +20,7 @@ public class MovementSaltoV2 : MonoBehaviour {
 
     public Transform[] points;
 
-    public float patrolSpeed=1f;
+    public float patrolSpeed = 1f;
 
     public SpriteRenderer renderer;
     private bool isGrounded = true;
@@ -30,77 +32,95 @@ public class MovementSaltoV2 : MonoBehaviour {
 
     public Animator anim2D;
     // Use this for initialization
-    void Start () {
-		if(points.Length != 0){
+    protected override void Start()
+    {
+        base.Start();
+        if (points.Length != 0)
+        {
             Debug.Log("Lenght is : " + points.Length);
             anim2D.SetInteger("MoveState", 3);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         //Corregir despues
-        
-        if (!isAttacking) {
-            if (points.Length != 0) {
+
+        if (!isAttacking)
+        {
+            if (points.Length != 0)
+            {
 
                 float distanceToPlayer = points[actualTarget].position.x - transform.position.x;
                 renderer.flipX = distanceToPlayer > 0;
 
-                if (Mathf.Abs(distanceToPlayer) < 0.1f) {
+                if (Mathf.Abs(distanceToPlayer) < 0.1f)
+                {
                     actualTarget += 1;
-                    if (actualTarget == points.Length) {
+                    if (actualTarget == points.Length)
+                    {
                         actualTarget = 0;
                     }
                 }
-                
+
                 charRigidbody2D.velocity = new Vector2(Mathf.Sign(distanceToPlayer) * patrolSpeed, charRigidbody2D.velocity.y);
 
             }
-        } else {
+        }
+        else
+        {
             float distanceToPlayer = player.position.x - transform.position.x;
             renderer.flipX = distanceToPlayer > 0;
             RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
             RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
-            isGrounded =!(!downLeft && !downRight);
-            if (isGrounded){
+            isGrounded = !(!downLeft && !downRight);
+            if (isGrounded)
+            {
                 anim2D.SetInteger("MoveState", 1);
-            } else{
+            }
+            else
+            {
                 anim2D.SetInteger("MoveState", 2);
             }
         }
 
 
-	}
+    }
 
 
     public void OnTriggerEnterCall()
-	{
+    {
         Jump(distance);
         isAttacking = true;
-	}
+    }
 
-    public void Jump(float jumpDistance){
+    public void Jump(float jumpDistance)
+    {
         Debug.Log("Jumping!");
         charRigidbody2D.AddForce(Vector2.up * jumpSpeed + Vector2.right * jumpDistance, ForceMode2D.Impulse);
     }
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         GameObject collisionObject = collision.gameObject;
-        if(collisionObject.CompareTag("Player")){
+        if (collisionObject.CompareTag("Player"))
+        {
             Movement movement = collisionObject.GetComponent<Movement>();
-            if(movement){
+            if (movement)
+            {
                 movement.TakeDamage(attack);
 
             }
         }
-        if(isAttacking&&!Movement.isPuzzleNotActive){
+        if (isAttacking && !Movement.isPuzzleNotActive)
+        {
             JumpAttack();
         }
-	}
+    }
 
-    public void JumpAttack(){
-        float distanceToPlayer = player.position.x-transform.position.x;
+    public void JumpAttack()
+    {
+        float distanceToPlayer = player.position.x - transform.position.x;
         //Debug.Log(distanceToPlayer / 2);
         if (charRigidbody2D.velocity.x < 0 && distanceToPlayer < 0)
         {
@@ -110,7 +130,7 @@ public class MovementSaltoV2 : MonoBehaviour {
         {
             charRigidbody2D.velocity = new Vector2(0.01f, charRigidbody2D.velocity.y);
         }
-        Debug.Log("Distance: "+distanceToPlayer+", Velocity(X):"+ charRigidbody2D.velocity.x);
-        Jump(Mathf.Clamp(distanceToPlayer / 2,-maxJumpHorizontal,maxJumpHorizontal));
+        Debug.Log("Distance: " + distanceToPlayer + ", Velocity(X):" + charRigidbody2D.velocity.x);
+        Jump(Mathf.Clamp(distanceToPlayer / 2, -maxJumpHorizontal, maxJumpHorizontal));
     }
 }

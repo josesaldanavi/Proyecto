@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     public PoderDePuas poderDePuas;
 
     public static bool activarPoder_Murralla=false;
-    public static bool activarPoder_pua = false;
+    public static bool activarPoder_pua = true;
     public Animator animator2d;
 
 
