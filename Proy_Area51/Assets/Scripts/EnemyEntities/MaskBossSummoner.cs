@@ -8,13 +8,17 @@ public class MaskBossSummoner : MonoBehaviour {
     public bool isOneDown = false;
     public GameObject monsterPrefab;
     public List<MovementSaltoV2> worms= new List<MovementSaltoV2>();
+    public int numberOfMonstersPerWave;
+    public int maxNumberOfMonster;
+
+    public float timeBetweenSummon=6f;
 
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
 
 	// Use this for initialization
 	void Start () {
         blueMaskBoss.GoDown();
-        StartCoroutine(SummonWormsRoutine(3f));
+        StartCoroutine(SummonWormsRoutine(timeBetweenSummon));
         //redMaskBoss.GoUpAgain();
 	}
 	
@@ -35,7 +39,7 @@ public class MaskBossSummoner : MonoBehaviour {
     IEnumerator SummonWormsRoutine(float timeBetween){
         while(true){
             yield return new WaitForSeconds(timeBetween);
-            waveSummon(4);
+            waveSummon(Mathf.Clamp(maxNumberOfMonster-worms.Count,0,numberOfMonstersPerWave));
         }
     }
     private void waveSummon(int quantity){

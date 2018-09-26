@@ -14,7 +14,7 @@ public class MovementSaltoV2 : Enemy
 
     public bool isAttacking = false;
 
-    public Transform player;
+    private Transform player;
 
     int actualTarget = 0;
 
@@ -48,6 +48,8 @@ public class MovementSaltoV2 : Enemy
         }
         modifiedAttack = attack ;
         modifiedJumpSpeed = jumpSpeed ;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

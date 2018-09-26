@@ -11395,7 +11395,6 @@ MonoBehaviour:
   attack: 1
   maxJumpHorizontal: 2
   isAttacking: 0
-  player: {fileID: 2079437376}
   points:
   - {fileID: 1942010796}
   - {fileID: 1204400181}
@@ -13984,7 +13983,7 @@ Canvas:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1238559313}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
@@ -14535,7 +14534,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 33
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 137
     m_Alignment: 1
@@ -14787,7 +14786,6 @@ MonoBehaviour:
   attack: 1
   maxJumpHorizontal: 2
   isAttacking: 0
-  player: {fileID: 2079437376}
   points:
   - {fileID: 306868435}
   - {fileID: 174540598}
@@ -43719,6 +43717,9 @@ MonoBehaviour:
   monsterPrefab: {fileID: 1371625261395062, guid: 4816dcaac09ea4526bf5aac422f29ce8,
     type: 2}
   worms: []
+  numberOfMonstersPerWave: 3
+  maxNumberOfMonster: 15
+  timeBetweenSummon: 6
 --- !u!1 &1716543995
 GameObject:
   m_ObjectHideFlags: 0
