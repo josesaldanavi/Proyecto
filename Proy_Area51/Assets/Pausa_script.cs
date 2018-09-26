@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Pausa_script : MonoBehaviour {
     bool activado;
+    public AudioMixer audioMixer;
    public static Canvas canvas;
 	// Use this for initialization
 	void Start () {
@@ -23,4 +25,9 @@ public class Pausa_script : MonoBehaviour {
             Time.timeScale = (activado) ? 0 : 1f;
         }
 	}
+
+    public void setVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
+    }
 }
