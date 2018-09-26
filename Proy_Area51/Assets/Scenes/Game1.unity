@@ -43716,6 +43716,9 @@ MonoBehaviour:
   redMaskBoss: {fileID: 2089529225}
   blueMaskBoss: {fileID: 1060200555}
   isOneDown: 0
+  monsterPrefab: {fileID: 1371625261395062, guid: 4816dcaac09ea4526bf5aac422f29ce8,
+    type: 2}
+  worms: []
 --- !u!1 &1716543995
 GameObject:
   m_ObjectHideFlags: 0

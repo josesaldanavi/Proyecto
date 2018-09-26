@@ -6,13 +6,15 @@ public class MaskBossSummoner : MonoBehaviour {
     public MaskBoss redMaskBoss;
     public MaskBoss blueMaskBoss;
     public bool isOneDown = false;
-
+    public GameObject monsterPrefab;
+    public List<MovementSaltoV2> worms= new List<MovementSaltoV2>();
 
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
 
 	// Use this for initialization
 	void Start () {
         blueMaskBoss.GoDown();
+        StartCoroutine(SummonWormsRoutine(3f));
         //redMaskBoss.GoUpAgain();
 	}
 	
@@ -30,5 +32,32 @@ public class MaskBossSummoner : MonoBehaviour {
            
             blueMaskBoss.GoDown();
     }
+    IEnumerator SummonWormsRoutine(float timeBetween){
+        while(true){
+            yield return new WaitForSeconds(timeBetween);
+            waveSummon(4);
+        }
+    }
+    private void waveSummon(int quantity){
+        for (int i = 0;i < quantity;i++){
+            GameObject newWorm = Instantiate(monsterPrefab);
+            newWorm.transform.SetParent(transform);
+            newWorm.transform.localPosition = Vector3.zero+Vector3.right*i*0.01f;
+            worms.Add(newWorm.GetComponent<MovementSaltoV2>());
+        }
 
+    }
+
+    public void BuffMonstersAttack(){
+        for (int i = 0; i < worms.Count;i++){
+            worms[i].AttackBuff();
+        }
+    }
+    public void BuffMonstersSpeed()
+    {
+        for (int i = 0; i < worms.Count; i++)
+        {
+            worms[i].SpeedBuff();
+        }
+    }
 }

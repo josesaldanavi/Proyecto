@@ -76,5 +76,11 @@ public class MaskBoss : Enemy {
         canTakeDanage = true;
         currentTarget = downPosition;
         Debug.Log("GoingDown: "+transform.name);
+
+        if(isLeft){
+            summoner.BuffMonstersSpeed();
+        }else{
+            summoner.BuffMonstersAttack();
+        }
     }
 }
