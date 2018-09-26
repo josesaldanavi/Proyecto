@@ -5,7 +5,7 @@ using UnityEngine;
 public class MaskBossSummoner : MonoBehaviour {
     public MaskBoss redMaskBoss;
     public MaskBoss blueMaskBoss;
-
+    public bool isOneDown = false;
 
 
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
@@ -13,7 +13,7 @@ public class MaskBossSummoner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         blueMaskBoss.GoDown();
-        redMaskBoss.GoUpAgain();
+        //redMaskBoss.GoUpAgain();
 	}
 	
 	// Update is called once per frame
@@ -24,9 +24,11 @@ public class MaskBossSummoner : MonoBehaviour {
 
     public void CallitsDown(bool isLeftDown){
         if (isLeftDown)
-            blueMaskBoss.GoDown();
-        else
+           
             redMaskBoss.GoDown();
+        else
+           
+            blueMaskBoss.GoDown();
     }
 
 }

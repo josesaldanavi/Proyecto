@@ -14,9 +14,9 @@ public class MaskBoss : Enemy {
     public int maxHP;
     public Transform downTransform;
     private Vector3 downPosition;
-    public Vector3 currentTarget;
+    private Vector3 currentTarget;
 
-    private bool canTakeDanage=false;
+    public bool canTakeDanage=false;
 
     public bool isLeft;
 	// Use this for initialization
@@ -26,10 +26,11 @@ public class MaskBoss : Enemy {
         collider2D = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentTarget = startTransform.position;
+        downPosition = downTransform.position;
 	}
 	private void Update()
 	{
-        if(transform.position!=startPosition&&canMove)
+        if(transform.position!=currentTarget&&canMove)
             transform.position = Vector3.MoveTowards(transform.position, currentTarget, Time.deltaTime);
 	}
     public override void StabThis(Transform pua)
@@ -49,23 +50,31 @@ public class MaskBoss : Enemy {
 	{
         collider2D.enabled = false;
         spriteRenderer.enabled = false;
+        summoner.isOneDown = true;
+        summoner.CallitsDown(isLeft);
 	}
     public override void TakeDamage(int damage = 1)
     {
-        base.TakeDamage();
-        if( ((maxHP-hp)&(maxHP-hp-1))==0){
-            Debug.Log("Vida restante es multiplo de 2");
-            GoUpAgain();
+        if(canTakeDanage){
+            base.TakeDamage();
+            if (((maxHP - hp) & (maxHP - hp - 1)) == 0&&!summoner.isOneDown)
+            {
+                Debug.Log("Vida restante es multiplo de 2");
+                GoUpAgain();
+            }
         }
+
     }
 
     public void GoUpAgain(){
         canTakeDanage = false;
         currentTarget = startPosition;
         summoner.CallitsDown(isLeft);
+        Debug.Log("GoingUpAgain: " + transform.name);
     }
     public void GoDown(){
         canTakeDanage = true;
         currentTarget = downPosition;
+        Debug.Log("GoingDown: "+transform.name);
     }
 }

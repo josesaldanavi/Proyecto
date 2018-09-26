@@ -754,6 +754,34 @@ MonoBehaviour:
   camera: {fileID: 519420030}
   rockObject: {fileID: 648032731}
   oro: {fileID: 1242731861}
+--- !u!1 &202367038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 202367039}
+  m_Layer: 0
+  m_Name: RedBossDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &202367039
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202367038}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.4899998, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1711019778}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &219792479
 Prefab:
   m_ObjectHideFlags: 0
@@ -12933,7 +12961,7 @@ GameObject:
   - component: {fileID: 1060200554}
   - component: {fileID: 1060200553}
   m_Layer: 0
-  m_Name: MaskBoss
+  m_Name: BlueMaskBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12947,11 +12975,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1060200551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.01, y: 3.19, z: 0}
+  m_LocalPosition: {x: -2.5, y: 2.0000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_Father: {fileID: 1711019778}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1060200553
 CircleCollider2D:
@@ -13001,13 +13029,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charRigidbody2D: {fileID: 1060200554}
-  hp: 3
+  hp: 5
   startTransform: {fileID: 1060200552}
-  summoner: {fileID: 0}
-  maxHP: 0
-  downTransform: {fileID: 0}
-  currentTarget: {x: 0, y: 0, z: 0}
-  isLeft: 0
+  summoner: {fileID: 1711019779}
+  maxHP: 5
+  downTransform: {fileID: 1799051568}
+  canTakeDanage: 0
+  isLeft: 1
 --- !u!212 &1060200556
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -43566,8 +43594,9 @@ GameObject:
   - component: {fileID: 1711019777}
   - component: {fileID: 1711019776}
   - component: {fileID: 1711019775}
+  - component: {fileID: 1711019779}
   m_Layer: 0
-  m_Name: MaskBoss (2)
+  m_Name: MaskBossMaster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43665,10 +43694,28 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 10.51, y: 4.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1799051568}
+  - {fileID: 1060200552}
+  - {fileID: 2089529227}
+  - {fileID: 202367039}
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711019779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1711019774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8be36a33270c4eb796b5b3369392a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redMaskBoss: {fileID: 2089529225}
+  blueMaskBoss: {fileID: 1060200555}
+  isOneDown: 0
 --- !u!1 &1716543995
 GameObject:
   m_ObjectHideFlags: 0
@@ -48695,6 +48742,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1799051567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1799051568}
+  m_Layer: 0
+  m_Name: LeftBossDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1799051568
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1799051567}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.5, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1711019778}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1813621780
 GameObject:
   m_ObjectHideFlags: 0
@@ -49776,7 +49851,7 @@ GameObject:
   - component: {fileID: 2089529224}
   - component: {fileID: 2089529223}
   m_Layer: 0
-  m_Name: MaskBoss (1)
+  m_Name: RedMaskBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49830,12 +49905,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charRigidbody2D: {fileID: 2089529224}
-  hp: 3
+  hp: 1
   startTransform: {fileID: 2089529227}
-  summoner: {fileID: 0}
-  maxHP: 0
-  downTransform: {fileID: 0}
-  currentTarget: {x: 0, y: 0, z: 0}
+  summoner: {fileID: 1711019779}
+  maxHP: 3
+  downTransform: {fileID: 202367039}
+  canTakeDanage: 0
   isLeft: 0
 --- !u!212 &2089529226
 SpriteRenderer:
@@ -49891,11 +49966,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2089529222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13, y: 3.19, z: 0}
+  m_LocalPosition: {x: 2.4899998, y: 2.0000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_Father: {fileID: 1711019778}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2140446362
 GameObject:
