@@ -31,6 +31,12 @@ public class MovementSaltoV2 : Enemy
     public float rayDetectionDistance = 0.1f;
 
     public Animator anim2D;
+
+    private float modifiedAttack;
+    private float modifiedJumpSpeed;
+
+
+
     // Use this for initialization
     protected override void Start()
     {
@@ -40,6 +46,8 @@ public class MovementSaltoV2 : Enemy
             Debug.Log("Lenght is : " + points.Length);
             anim2D.SetInteger("MoveState", 3);
         }
+        modifiedAttack = attack ;
+        modifiedJumpSpeed = jumpSpeed ;
     }
 
     // Update is called once per frame
@@ -132,5 +140,26 @@ public class MovementSaltoV2 : Enemy
         }
         Debug.Log("Distance: " + distanceToPlayer + ", Velocity(X):" + charRigidbody2D.velocity.x);
         Jump(Mathf.Clamp(distanceToPlayer / 2, -maxJumpHorizontal, maxJumpHorizontal));
+    }
+
+    public void ChangeBuff(float attackModifier, float jumpSpeedModifier){
+        modifiedAttack = attack * attackModifier;
+        modifiedJumpSpeed = jumpSpeed * jumpSpeedModifier;
+    }
+    public void SpeedBuff(){
+        ChangeBuff(1f, 2f);
+        StartCoroutine(waitAndReturnToNormal());
+    }
+    public void AttackBuff(){
+        ChangeBuff(2f, 1f);
+        StartCoroutine(waitAndReturnToNormal());
+    }
+    public void BackToNormal(){
+        ChangeBuff(2f, 1f);
+    }
+
+    IEnumerator waitAndReturnToNormal(){
+        yield return new WaitForSeconds(5f);
+        BackToNormal();
     }
 }

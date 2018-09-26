@@ -15,7 +15,7 @@ public class DialogController : MonoBehaviour {
 	void Start ()
     {
             StartCoroutine(Type());
-            canvas_puz.enabled = false;
+            //canvas_puz.enabled = false;
     }
 	
 	// Update is called once per frame
@@ -49,7 +49,7 @@ public class DialogController : MonoBehaviour {
             textButton.text = "ROMPECABEZAS";
             Destroy(textButton);
             Destroy(textDisplay);
-            canvas_puz.enabled = true;
+            canvas_puz.gameObject.SetActive(true);
         }
     }
 }
