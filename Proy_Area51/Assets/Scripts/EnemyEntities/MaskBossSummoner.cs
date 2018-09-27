@@ -39,6 +39,7 @@ public class MaskBossSummoner : MonoBehaviour {
     IEnumerator SummonWormsRoutine(float timeBetween){
         while(true){
             yield return new WaitForSeconds(timeBetween);
+            if(maxNumberOfMonster!=worms.Count)
             waveSummon(Mathf.Clamp(maxNumberOfMonster-worms.Count,0,numberOfMonstersPerWave));
         }
     }
@@ -54,14 +55,16 @@ public class MaskBossSummoner : MonoBehaviour {
 
     public void BuffMonstersAttack(){
         for (int i = 0; i < worms.Count;i++){
-            worms[i].AttackBuff();
+            if(worms[i]!=null)
+            worms[i].AttackBuff(2f);
         }
     }
     public void BuffMonstersSpeed()
     {
         for (int i = 0; i < worms.Count; i++)
         {
-            worms[i].SpeedBuff();
+            if (worms[i] != null)
+            worms[i].SpeedBuff(2f);
         }
     }
 }

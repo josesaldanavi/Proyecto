@@ -148,17 +148,21 @@ public class MovementSaltoV2 : Enemy
         modifiedAttack = attack * attackModifier;
         modifiedJumpSpeed = jumpSpeed * jumpSpeedModifier;
     }
-    public void SpeedBuff(){
-        ChangeBuff(1f, 2f);
-        StartCoroutine(waitAndReturnToNormal());
+    public void SpeedBuff(float jumpSpeedModifier){
+        //ChangeBuff(1f, 2f);
+        modifiedJumpSpeed=jumpSpeed * jumpSpeedModifier;
+        //StartCoroutine(waitAndReturnToNormal());
     }
-    public void AttackBuff(){
-        ChangeBuff(2f, 1f);
-        StartCoroutine(waitAndReturnToNormal());
+    public void AttackBuff(float attackModifier){
+        //ChangeBuff(2f, 1f);
+        modifiedAttack = attack * attackModifier;
+        //StartCoroutine(waitAndReturnToNormal());
     }
     public void BackToNormal(){
         ChangeBuff(2f, 1f);
     }
+
+
 
     IEnumerator waitAndReturnToNormal(){
         yield return new WaitForSeconds(5f);
