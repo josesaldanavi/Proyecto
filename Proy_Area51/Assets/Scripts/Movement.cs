@@ -43,6 +43,7 @@ public class Movement : MonoBehaviour
 
 
     public bool isSummoning=false;
+    private bool isDead = false;
     // Use this for initialization
     void Start()
     {
@@ -80,8 +81,8 @@ public class Movement : MonoBehaviour
             {
                 
                 charRigidbody2D.velocity = new Vector2(0f, charRigidbody2D.velocity.y);
-                //if (!isSummoning)
-                //animator2d.SetInteger("Speed2", 0);
+                if (!isSummoning&&!isDead)
+                animator2d.SetInteger("Speed2", 0);
             }
         
        
@@ -180,6 +181,7 @@ public class Movement : MonoBehaviour
                     isPuzzleNotActive = true;
                     animator2d.SetTrigger("Muerte");
                     gameOverObject.playGameOver();
+                    isDead = true;
                     //Destroy(player);
                     //SceneManager.LoadScene(0);
                 }
