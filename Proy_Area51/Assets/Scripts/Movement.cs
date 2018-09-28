@@ -80,8 +80,8 @@ public class Movement : MonoBehaviour
             {
                 
                 charRigidbody2D.velocity = new Vector2(0f, charRigidbody2D.velocity.y);
-                if (!isSummoning)
-                animator2d.SetInteger("Speed2", 0);
+                //if (!isSummoning)
+                //animator2d.SetInteger("Speed2", 0);
             }
         
        
@@ -178,6 +178,7 @@ public class Movement : MonoBehaviour
                 {
                     personalSealImage.SetActive(true);
                     isPuzzleNotActive = true;
+                    animator2d.SetTrigger("Muerte");
                     gameOverObject.playGameOver();
                     //Destroy(player);
                     //SceneManager.LoadScene(0);
@@ -211,7 +212,7 @@ public class Movement : MonoBehaviour
     public void SummonEolicPower(float distance)
     {
         Vector3 startPoint = new Vector3(transform.position.x + distance, transform.position.y, transform.position.z);
-        poderEolico.SummonThis(startPoint);
+        poderEolico.SummonThis(startPoint,spriteRenderer.flipX);
 
         Debug.Log("Poder eolico");
     }
@@ -219,6 +220,8 @@ public class Movement : MonoBehaviour
 
     public void releaseFromCurse()
     {
+
+        animator2d.SetTrigger("Comienzo");
         isSealed = false;
     }
 

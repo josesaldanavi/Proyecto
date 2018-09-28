@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
 	
     public virtual void StabThis(Transform pua)
     {
-        TakeDamage();
+        TakeDamage(2);
         charRigidbody2D.bodyType = RigidbodyType2D.Static;
         transform.SetParent(pua);
     }

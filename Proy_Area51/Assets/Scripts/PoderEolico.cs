@@ -43,10 +43,11 @@ public class PoderEolico : MonoBehaviour
         collider.enabled = false;
     }
 
-    public void SummonThis(Vector3 startPoint)
+    public void SummonThis(Vector3 startPoint,bool right)
     {
         if (canUse)
         {
+            spriterenderer.flipX = right;
             canUse = false;
             thisParent.position = startPoint-Vector3.up*0.77f;
             EnableThis();
