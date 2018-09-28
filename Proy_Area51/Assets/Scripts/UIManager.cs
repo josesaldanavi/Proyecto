@@ -11,8 +11,8 @@ public class UIManager : MonoBehaviour {
     public Text coinText;
 	// Use this for initialization
 	void Start () {
-        hpBar.fillAmount = playerScript.normalizedHP;
-        hpBar.fillAmount = playerScript.normalizedHP;hpBar.color = barColors.Evaluate(hpBar.fillAmount);
+        //hpBar.fillAmount = playerScript.normalizedHP;
+        //hpBar.fillAmount = playerScript.normalizedHP;hpBar.color = barColors.Evaluate(hpBar.fillAmount);
 
 	}
 	

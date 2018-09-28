@@ -21,9 +21,11 @@ public class Movement : MonoBehaviour
 
     public ApareceDelSuelo poderDelSuelo;
     public PoderDePuas poderDePuas;
+    public PoderEolico poderEolico;
 
     public static bool activarPoder_Murralla=false;
     public static bool activarPoder_pua = true;
+    public static bool activarPoder_Estruendo = true;
     public Animator animator2d;
 
 
@@ -87,52 +89,61 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        if (!isSealed && !isPuzzleNotActive&&!isSummoning)
+
+        if (!isSealed && !isPuzzleNotActive && !isSummoning)
+        {
+            RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
+            RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
+
+            if (isGrounded)
             {
-                RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
-                RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
-
-                if (isGrounded)
+                if (!downLeft && !downRight)
                 {
-                    if (!downLeft && !downRight)
+                    isGrounded = false;
+                }
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                    isGrounded = false;
+                }
+                else if (Input.GetKeyDown(KeyCode.W))
+                {
+                    if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                     {
-                        isGrounded = false;
-                    }
-                    else if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        charRigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-                        isGrounded = false;
-                    }
-                    else if (Input.GetKeyDown(KeyCode.W))
-                    {
-                        if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
-                        {
-                            if(activarPoder_Murralla)
+                        if (activarPoder_Murralla)
                             SummonEarth(0);
-                        }
-
                     }
-                    else if (Input.GetKeyDown(KeyCode.E))
+
+                }
+                else if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                     {
-                        if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
-                        {
-                            if(activarPoder_pua)
+                        if (activarPoder_pua)
                             StartSummoning();
 
 
-                        }
                     }
-                }
-                else
+                }else if (Input.GetKeyDown(KeyCode.L))
                 {
-                    if ((downLeft || downRight) && charRigidbody2D.velocity.y == 0)
+                    if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                     {
-                        isGrounded = true;
+                        if (activarPoder_Estruendo)
+                            StartSummoningV2();
+
+
                     }
                 }
             }
-        
+            else
+            {
+                if ((downLeft || downRight) && charRigidbody2D.velocity.y == 0)
+                {
+                    isGrounded = true;
+                }
+            }
+
+        }
     }
 
     public void TakeDamage(int damage)
@@ -197,6 +208,14 @@ public class Movement : MonoBehaviour
         poderDePuas.SummonThis(startPoint);
     }
 
+    public void SummonEolicPower(float distance)
+    {
+        Vector3 startPoint = new Vector3(transform.position.x + distance, transform.position.y, transform.position.z);
+        poderEolico.SummonThis(startPoint);
+
+        Debug.Log("Poder eolico");
+    }
+
 
     public void releaseFromCurse()
     {
@@ -220,10 +239,24 @@ public class Movement : MonoBehaviour
         isSummoning = true;
         animator2d.SetInteger("Speed2", 2);
     }
+    private void StartSummoningV2()
+        {
+            isSummoning = true;
+            animator2d.SetInteger("Speed2", 3);
+        }
+
+
 
     public void summonSpikeNow() {
         
         SummonSpike((spriteRenderer.flipX) ? -1 : 1);
+        isSummoning = false;
+    }
+
+    public void summonEolicPowerNow()
+    {
+
+        SummonEolicPower((spriteRenderer.flipX) ? -1 : 1);
         isSummoning = false;
     }
 
