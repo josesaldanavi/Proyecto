@@ -48,7 +48,7 @@ public class PoderEolico : MonoBehaviour
         if (canUse)
         {
             canUse = false;
-            thisParent.position = startPoint;
+            thisParent.position = startPoint-Vector3.up*0.77f;
             EnableThis();
             animator.SetTrigger("Attack");
 
