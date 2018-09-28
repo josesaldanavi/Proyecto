@@ -19,9 +19,6 @@ public class TrampaConClick : MonoBehaviour
     private bool isActiveAndReady;
 
     public CamMovement camera;
-
-    public GameObject rockObject;
-    private Animator rockAnimator;
     public Animator oro;
     // Use this for initialization
     void Awake()
@@ -37,7 +34,6 @@ public class TrampaConClick : MonoBehaviour
         //Por ahora va a activarse cuando comienza.
         //Cambiar logica si se desea utilizarlo diferente despues.
         Activate();
-        rockAnimator=rockObject.GetComponent<Animator>();
         piedraRate = piedra.emission;
         piedraRate1 = piedra1.emission;
         piedraRate2 = piedra2.emission;
@@ -63,7 +59,6 @@ public class TrampaConClick : MonoBehaviour
             print("Falta hacer click " + health + " vece(s)");
             if (health == 0)
             {
-                rockObject.SetActive(false);
                 print("Destroyed!");
                 player.releaseFromCurse();
                 piedra.Stop();

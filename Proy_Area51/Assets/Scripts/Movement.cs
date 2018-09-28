@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Movement : MonoBehaviour
     public float jumpSpeed = 10;
     public float health = 10;
     public float maxHealth = 10;
+    public int lifes = 1;
+    public Vector3 checkpoint;
 
     public GameObject personalSealImage;
 
@@ -153,9 +156,22 @@ public class Movement : MonoBehaviour
             health = Mathf.Clamp(health, 0f, maxHealth);
             if (health == 0)
             {
-                personalSealImage.SetActive(true);
-                isPuzzleNotActive = true;
-                gameOverObject.playGameOver();
+                transform.position = checkpoint;
+                lifes--;
+
+                if (lifes > 0)
+                {
+                    health = maxHealth;
+                }       
+                else
+                {
+                    personalSealImage.SetActive(true);
+                    isPuzzleNotActive = true;
+                    gameOverObject.playGameOver();
+                    //Destroy(player);
+                    //SceneManager.LoadScene(0);
+                }
+
 
             }
         }
@@ -209,6 +225,21 @@ public class Movement : MonoBehaviour
         
         SummonSpike((spriteRenderer.flipX) ? -1 : 1);
         isSummoning = false;
+    }
+
+    private void OnBecameInvisible()
+    {
+        transform.position = checkpoint;
+        TakeDamage(3);
+        /*if (lifes > 0)
+        {
+            Tak
+        }
+        else
+        {
+            //Destroy(player);
+            SceneManager.LoadScene(0);
+        }*/
     }
 
 }
