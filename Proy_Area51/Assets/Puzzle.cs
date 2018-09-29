@@ -34,6 +34,8 @@ public class Puzzle : MonoBehaviour {
         Movement.isPuzzleNotActive=false;
         canvas_puz.enabled=false;
         Movement.activarPoder_Murralla = true;
+        Movement.activarPoder_Estruendo = true;
+        Movement.activarPoder_pua = true;
 		Debug.Log("YOU WIN!");
 	}
 }

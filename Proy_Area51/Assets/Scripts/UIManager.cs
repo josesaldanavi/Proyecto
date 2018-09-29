@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour {
     public Movement playerScript;
     public Gradient barColors;
     public static int coinCounter;
+    public static int gemaCounter=0;
     public Text coinText;
+    public Text lifesText;
 	// Use this for initialization
 	void Start () {
         //hpBar.fillAmount = playerScript.normalizedHP;
@@ -28,6 +30,18 @@ public class UIManager : MonoBehaviour {
 
         }
         if(coinText != null)
-        coinText.text = "Coins:" + coinCounter;
+        {
+            coinText.text = "Coins:" + coinCounter;
+        }
+        if(lifesText != null)
+        {
+            lifesText.text = "Vida:" + playerScript.lifes;
+            if (playerScript.lifes > 1)
+            {
+                lifesText.text = "Vidas:" + playerScript.lifes;
+            }
+        }
+        
+    
 	}
 }

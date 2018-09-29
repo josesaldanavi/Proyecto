@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     public float jumpSpeed = 10;
     public float health = 10;
     public float maxHealth = 10;
-    public int lifes = 1;
+    public  int lifes = 1;
     public Vector3 checkpoint;
 
     public GameObject personalSealImage;
@@ -24,8 +24,8 @@ public class Movement : MonoBehaviour
     public PoderEolico poderEolico;
 
     public static bool activarPoder_Murralla=false;
-    public static bool activarPoder_pua = true;
-    public static bool activarPoder_Estruendo = true;
+    public static bool activarPoder_pua = false;
+    public static bool activarPoder_Estruendo = false;
     public Animator animator2d;
 
 
@@ -143,9 +143,17 @@ public class Movement : MonoBehaviour
                     isGrounded = true;
                 }
             }
-
         }
     }
+
+    public void VidaAumentada()
+    {
+        if (UIManager.gemaCounter % 10==0)
+        {
+            lifes+=1;
+        }
+    }
+
 
     public void TakeDamage(int damage)
     {
