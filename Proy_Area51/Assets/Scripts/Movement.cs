@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     public float jumpSpeed = 10;
     public float health = 10;
     public float maxHealth = 10;
-    public  int lifes = 1;
+    public int lifes = 1;
     public Vector3 checkpoint;
 
     public GameObject personalSealImage;
@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     public PoderEolico poderEolico;
 
     public static bool activarPoder_Murralla=false;
-    public static bool activarPoder_pua = false;
+    public static bool activarPoder_pua = true;
     public static bool activarPoder_Estruendo = false;
     public Animator animator2d;
 
@@ -95,7 +95,6 @@ public class Movement : MonoBehaviour
         {
             RaycastHit2D downLeft = Physics2D.Raycast(leftNode, Vector3.down, rayDetectionDistance);
             RaycastHit2D downRight = Physics2D.Raycast(rightNode, Vector3.down, rayDetectionDistance);
-
             if (isGrounded)
             {
                 if (!downLeft && !downRight)
@@ -125,7 +124,8 @@ public class Movement : MonoBehaviour
 
 
                     }
-                }else if (Input.GetKeyDown(KeyCode.L))
+                }
+                else if (Input.GetKeyDown(KeyCode.L))
                 {
                     if (downLeft.collider && downLeft.collider.CompareTag("Ground"))
                     {
@@ -145,15 +145,6 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
-    public void VidaAumentada()
-    {
-        if (UIManager.gemaCounter % 10==0)
-        {
-            lifes+=1;
-        }
-    }
-
 
     public void TakeDamage(int damage)
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gemas : MonoBehaviour {
     public bool agarro;
+    public static int  gemaCounter;
+    public Movement lifesUp;
     // Use this for initialization
     void Start () {
 		
@@ -20,11 +22,15 @@ public class Gemas : MonoBehaviour {
             agarro = true;
             if (agarro)
             {
-                UIManager.gemaCounter ++ ;
+                gemaCounter ++ ;
                 Destroy(gameObject);
+                if (gemaCounter % 10 == 0)
+                {
+                    lifesUp.lifes++;
+                }
                 
             }
-            Debug.Log(UIManager.gemaCounter);
+            Debug.Log(gemaCounter);
         }
     }
 }

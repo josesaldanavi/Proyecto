@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour {
     public Movement playerScript;
     public Gradient barColors;
     public static int coinCounter;
-    public static int gemaCounter=0;
     public Text coinText;
     public Text lifesText;
 	// Use this for initialization

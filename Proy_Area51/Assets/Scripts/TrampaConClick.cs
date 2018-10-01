@@ -8,6 +8,7 @@ public class TrampaConClick : MonoBehaviour
     public Movement player;
     public GameObject sealSprite;
     public GameObject notPlayer;
+    public AudioSource roadingRock;
 
     public ParticleSystem piedra;
     public ParticleSystem piedra1;
@@ -17,6 +18,7 @@ public class TrampaConClick : MonoBehaviour
     ParticleSystem.EmissionModule piedraRate2;
     float cont = 0.2f;
     private bool isActiveAndReady;
+    private bool run = false;
 
     public CamMovement camera;
     public Animator oro;
@@ -50,7 +52,7 @@ public class TrampaConClick : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isActiveAndReady)
         {
             TakeDamage();
-            camera.speed = 5;
+            camera.speed = 9;
             camera.impulseDirection = GetRandomDirection();
             //Aqui va la animacion
             //rockAnimator.SetTrigger("Play");
@@ -60,10 +62,12 @@ public class TrampaConClick : MonoBehaviour
             if (health == 0)
             {
                 print("Destroyed!");
-                player.releaseFromCurse();
                 piedra.Stop();
                 piedra1.Stop();
                 piedra2.Stop();
+                roadingRock.Stop();
+                player.releaseFromCurse();
+
                 DestroyThis();
             }
         }
