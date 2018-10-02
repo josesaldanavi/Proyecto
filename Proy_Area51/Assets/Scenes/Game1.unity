@@ -48300,8 +48300,8 @@ MonoBehaviour:
   charRigidbody2D: {fileID: 2079437381}
   characterSpeed: 5
   jumpSpeed: 0
-  health: 20
-  maxHealth: 20
+  health: 40
+  maxHealth: 40
   lifes: 1
   checkpoint: {x: 6, y: 0.97, z: 0}
   personalSealImage: {fileID: 1230947350}

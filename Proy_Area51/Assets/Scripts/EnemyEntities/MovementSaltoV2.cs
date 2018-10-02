@@ -24,8 +24,8 @@ public class MovementSaltoV2 : Enemy
 
     public SpriteRenderer renderer;
     private bool isGrounded = true;
-    private bool hasBuff = false;
-
+    private bool hasSpeedBuff = false;
+    private bool hasAttackBuff = false;
 
     Vector3 leftNode { get { return transform.position - new Vector3(0.5f, 1, 0); } }
     Vector3 rightNode { get { return transform.position + new Vector3(0.5f, -1, 0); } }
@@ -151,17 +151,49 @@ public class MovementSaltoV2 : Enemy
         
     }
     public void SpeedBuff(float jumpSpeedModifier){
-        //ChangeBuff(1f, 2f);
-        modifiedJumpSpeed=jumpSpeed * jumpSpeedModifier;
-        renderer.color = Color.blue;
-        Debug.Log("Cambia a azul");
+        if (!hasSpeedBuff)
+        {
+            
+            //ChangeBuff(1f, 2f);
+            hasSpeedBuff = true;
+            modifiedJumpSpeed = jumpSpeed * jumpSpeedModifier;
+            if (!hasAttackBuff)
+            {
+                renderer.color = Color.blue;
+            }
+            else
+            {
+                renderer.color = Color.green;
+            }
+            
+            Debug.Log("Cambia a azul");
+            transform.localScale = Vector2.one * 2;
+        }
+        
+
         //StartCoroutine(waitAndReturnToNormal());
     }
     public void AttackBuff(float attackModifier){
-        //ChangeBuff(2f, 1f);
-        modifiedAttack = attack * attackModifier;
-        renderer.color = Color.red;
-        //StartCoroutine(waitAndReturnToNormal());
+        if (!hasAttackBuff)
+        {
+            hasAttackBuff = true;
+            //ChangeBuff(2f, 1f);
+            modifiedAttack = attack * attackModifier;
+
+            if (!hasSpeedBuff)
+            {
+                renderer.color = Color.red;
+            }
+            else
+            {
+                renderer.color = Color.green;
+            }
+
+            
+            //StartCoroutine(waitAndReturnToNormal());
+        }
+        
+        
     }
     public void BackToNormal(){
         ChangeBuff(2f, 1f);
