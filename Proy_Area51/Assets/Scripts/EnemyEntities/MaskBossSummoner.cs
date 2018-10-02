@@ -12,21 +12,29 @@ public class MaskBossSummoner : MonoBehaviour {
     public int maxNumberOfMonster;
 
     public float timeBetweenSummon=6f;
+    public Transform wormParent;
 
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
 
 	// Use this for initialization
 	void Start () {
-        blueMaskBoss.GoDown();
-        StartCoroutine(SummonWormsRoutine(timeBetweenSummon));
+        //StartFight();
+
+
         //redMaskBoss.GoUpAgain();
 	}
 	
-	// Update is called once per frame
+    	// Update is called once per frame
 	void Update () {
         if (redMaskBoss.hp == 0 && blueMaskBoss.hp == 0)
             Destroy(gameObject);
 	}
+    public void StartFight()
+    {
+        blueMaskBoss.GoDown();
+        StartCoroutine(SummonWormsRoutine(timeBetweenSummon));
+    }
+
 
     public void CallitsDown(bool isLeftDown){
         if (isLeftDown)
@@ -45,15 +53,18 @@ public class MaskBossSummoner : MonoBehaviour {
     }
     private void waveSummon(int quantity){
         for (int i = 0;i < quantity;i++){
-            GameObject newWorm = Instantiate(monsterPrefab);
-            newWorm.transform.SetParent(transform);
-            newWorm.transform.localPosition = Vector3.zero+Vector3.right*i*0.01f;
+            Transform newWormObject = Instantiate(monsterPrefab).transform;
+            Transform newWorm = newWormObject.GetChild(0);
+            newWormObject.SetParent(wormParent);
+            newWormObject.localPosition = Vector3.zero + Vector3.right * i * 0.01f;
+            
             worms.Add(newWorm.GetComponent<MovementSaltoV2>());
         }
 
     }
 
     public void BuffMonstersAttack(){
+        Debug.Log("Buff attack");
         for (int i = 0; i < worms.Count;i++){
             if(worms[i]!=null)
             worms[i].AttackBuff(2f);
@@ -61,6 +72,7 @@ public class MaskBossSummoner : MonoBehaviour {
     }
     public void BuffMonstersSpeed()
     {
+        Debug.Log("Buff speed");
         for (int i = 0; i < worms.Count; i++)
         {
             if (worms[i] != null)

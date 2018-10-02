@@ -24,6 +24,7 @@ public class MovementSaltoV2 : Enemy
 
     public SpriteRenderer renderer;
     private bool isGrounded = true;
+    private bool hasBuff = false;
 
 
     Vector3 leftNode { get { return transform.position - new Vector3(0.5f, 1, 0); } }
@@ -147,15 +148,19 @@ public class MovementSaltoV2 : Enemy
     public void ChangeBuff(float attackModifier, float jumpSpeedModifier){
         modifiedAttack = attack * attackModifier;
         modifiedJumpSpeed = jumpSpeed * jumpSpeedModifier;
+        
     }
     public void SpeedBuff(float jumpSpeedModifier){
         //ChangeBuff(1f, 2f);
         modifiedJumpSpeed=jumpSpeed * jumpSpeedModifier;
+        renderer.color = Color.blue;
+        Debug.Log("Cambia a azul");
         //StartCoroutine(waitAndReturnToNormal());
     }
     public void AttackBuff(float attackModifier){
         //ChangeBuff(2f, 1f);
         modifiedAttack = attack * attackModifier;
+        renderer.color = Color.red;
         //StartCoroutine(waitAndReturnToNormal());
     }
     public void BackToNormal(){

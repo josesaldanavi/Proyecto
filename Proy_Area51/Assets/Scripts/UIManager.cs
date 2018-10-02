@@ -12,8 +12,8 @@ public class UIManager : MonoBehaviour {
     public Text lifesText;
 	// Use this for initialization
 	void Start () {
-        //hpBar.fillAmount = playerScript.normalizedHP;
-        //hpBar.fillAmount = playerScript.normalizedHP;hpBar.color = barColors.Evaluate(hpBar.fillAmount);
+        hpBar.fillAmount = 1f;
+        hpBar.color = barColors.Evaluate(1f);
 
 	}
 	

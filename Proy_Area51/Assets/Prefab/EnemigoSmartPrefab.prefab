@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 50753346143531924}
   - component: {fileID: 61456462620905542}
   - component: {fileID: 95109409326518902}
+  - component: {fileID: 58595896900413300}
   m_Layer: 0
   m_Name: EnemigoSalto
   m_TagString: Enemy
@@ -71,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371625261395062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.67, y: 0.42, z: -0.1953125}
+  m_LocalPosition: {x: 124.09129, y: 34.904377, z: -0.1953125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4912965430458554}
@@ -139,14 +140,29 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.64
+  m_Radius: 16.14
+--- !u!58 &58595896900413300
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932661008988988}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4296875
 --- !u!61 &61456462620905542
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1932661008988988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -197,12 +213,11 @@ MonoBehaviour:
   charRigidbody2D: {fileID: 50753346143531924}
   hp: 1
   characterSpeed: 0
-  jumpSpeed: 6
+  jumpSpeed: 3
   distance: -1
   attack: 1
   maxJumpHorizontal: 2
   isAttacking: 0
-  player: {fileID: 0}
   points: []
   patrolSpeed: 0.6
   renderer: {fileID: 212111192550725988}
