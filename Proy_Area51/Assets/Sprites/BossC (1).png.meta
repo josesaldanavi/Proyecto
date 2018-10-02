@@ -1,11 +1,7 @@
 fileFormatVersion: 2
-guid: 855be2e392ad3e146bb92919cc619227
+guid: 5ea14291815810d409c4d02987067ac9
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: CabezasGo_0
-    21300002: cabeza_ojosMorados
-    21300004: CabezasGo_2
-    21300006: cabeza_ojosRojos
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -42,7 +38,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -106,91 +102,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: CabezasGo_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 258
-        width: 231
-        height: 231
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77000803f3a6ee34c8e53c2bbb041632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cabeza_ojosMorados
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 258
-        width: 231
-        height: 231
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a02af3d64e4bb7449872b17a0140dd5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CabezasGo_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 231
-        height: 231
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17ddf3b596a35d24098fe7cbf14e00c6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cabeza_ojosRojos
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 231
-        height: 231
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8823c5507c33131469d91ae82e0b94e2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f498d69ed96acbf4380853b1ca30b29f
+    spriteID: 1a8c922eccc12ad43906f5d970c570c8
     vertices: []
     indices: 
     edges: []
