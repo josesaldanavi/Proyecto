@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 520679934}
-  escenas: Game
+  escenas: Game1
 --- !u!1 &1722929172
 GameObject:
   m_ObjectHideFlags: 0
