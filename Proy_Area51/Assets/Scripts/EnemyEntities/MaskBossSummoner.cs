@@ -47,6 +47,7 @@ public class MaskBossSummoner : MonoBehaviour {
     IEnumerator SummonWormsRoutine(float timeBetween){
         while(true){
             yield return new WaitForSeconds(timeBetween);
+            ClearMissingWorms();
             if(maxNumberOfMonster!=worms.Count)
             waveSummon(Mathf.Clamp(maxNumberOfMonster-worms.Count,0,numberOfMonstersPerWave));
         }
@@ -77,6 +78,15 @@ public class MaskBossSummoner : MonoBehaviour {
         {
             if (worms[i] != null)
             worms[i].SpeedBuff(2f);
+        }
+    }
+
+    void ClearMissingWorms(){
+        for (int i = 0; i < worms.Count; i++)
+        {
+            if(worms[i]==null){
+                worms.RemoveAt(i);
+            }
         }
     }
 }
