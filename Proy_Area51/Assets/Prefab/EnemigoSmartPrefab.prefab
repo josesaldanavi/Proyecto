@@ -223,6 +223,7 @@ MonoBehaviour:
   renderer: {fileID: 212111192550725988}
   rayDetectionDistance: 0.001
   anim2D: {fileID: 95109409326518902}
+  parent: {fileID: 1371625261395062}
 --- !u!114 &114783501098422022
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -36,7 +36,7 @@ public class MovementSaltoV2 : Enemy
     private float modifiedAttack;
     private float modifiedJumpSpeed;
 
-
+    public GameObject parent;
 
     // Use this for initialization
     protected override void Start()
@@ -204,5 +204,11 @@ public class MovementSaltoV2 : Enemy
     IEnumerator waitAndReturnToNormal(){
         yield return new WaitForSeconds(5f);
         BackToNormal();
+    }
+    protected override void DestroyThis()
+    {
+        if (parent)
+            Destroy(parent);
+        else Destroy(gameObject);
     }
 }
