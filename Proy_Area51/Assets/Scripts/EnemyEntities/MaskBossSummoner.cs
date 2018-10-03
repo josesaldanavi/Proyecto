@@ -14,13 +14,13 @@ public class MaskBossSummoner : MonoBehaviour {
     public float timeBetweenSummon=6f;
     public Transform wormParent;
 
+    public Animator animator;
+
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
 
 	// Use this for initialization
 	void Start () {
         //StartFight();
-
-
         //redMaskBoss.GoUpAgain();
 	}
 	
@@ -38,7 +38,7 @@ public class MaskBossSummoner : MonoBehaviour {
 
     public void CallitsDown(bool isLeftDown){
         if (isLeftDown)
-           
+            //animator.SetTrigger("Gusanos");
             redMaskBoss.GoDown();
         else
            
@@ -53,6 +53,7 @@ public class MaskBossSummoner : MonoBehaviour {
         }
     }
     private void waveSummon(int quantity){
+        animator.SetTrigger("Gusanos");
         for (int i = 0;i < quantity;i++){
             Transform newWormObject = Instantiate(monsterPrefab).transform;
             Transform newWorm = newWormObject.GetChild(0);

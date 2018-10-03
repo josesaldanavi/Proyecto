@@ -169,6 +169,7 @@ public class Movement : MonoBehaviour
             {
                 transform.position = checkpoint;
                 lifes--;
+                StartCoroutine(BossFightTrigger.resizeCameraSize(5f, Camera.main));
 
                 if (lifes > 0)
                 {
@@ -267,6 +268,7 @@ public class Movement : MonoBehaviour
     private void OnBecameInvisible()
     {
         transform.position = checkpoint;
+        StartCoroutine(BossFightTrigger.resizeCameraSize(5f, Camera.main));
         TakeDamage(3);
         /*if (lifes > 0)
         {

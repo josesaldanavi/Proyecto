@@ -8,6 +8,7 @@ public class BossFightTrigger : MonoBehaviour {
     public float bossCameraSize;
     private Camera thisCamera;
     public Collider2D collider;
+    private bool isBossActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,18 +24,22 @@ public class BossFightTrigger : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
-            maskBossSummoner.StartFight();
-            normalCameraSize = thisCamera.orthographicSize;
-            collider.enabled = false;
-            StartCoroutine(resizeCameraSize(bossCameraSize));
+            if(!isBossActive){
+                maskBossSummoner.StartFight();
+                normalCameraSize = thisCamera.orthographicSize;
+                isBossActive = true;
+            }
+
+            //collider.enabled = false;
+            StartCoroutine(resizeCameraSize(bossCameraSize, Camera.main));
         }
     }
-    IEnumerator resizeCameraSize(float newSize){
-        while(newSize!=normalCameraSize){
-            thisCamera.orthographicSize = Mathf.MoveTowards(thisCamera.orthographicSize, newSize, Time.deltaTime);
+    public static IEnumerator resizeCameraSize(float newSize, Camera camRef,GameObject reference=null){
+        while(camRef.orthographicSize!=newSize){
+            camRef.orthographicSize = Mathf.MoveTowards(camRef.orthographicSize, newSize, Time.deltaTime);
             yield return null;
         }
-        Destroy(gameObject);
+        if (reference) { Destroy(reference); }
     }
 
 
