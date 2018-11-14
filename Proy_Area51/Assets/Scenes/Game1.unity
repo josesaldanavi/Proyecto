@@ -9240,6 +9240,7 @@ MonoBehaviour:
   renderer: {fileID: 692146403}
   rayDetectionDistance: 0.001
   anim2D: {fileID: 692146402}
+  parent: {fileID: 0}
 --- !u!50 &692146400
 Rigidbody2D:
   serializedVersion: 4
@@ -15799,6 +15800,7 @@ MonoBehaviour:
   renderer: {fileID: 1373659555}
   rayDetectionDistance: 0.001
   anim2D: {fileID: 1373659554}
+  parent: {fileID: 0}
 --- !u!95 &1373659554
 Animator:
   serializedVersion: 3
@@ -46319,6 +46321,7 @@ MonoBehaviour:
   timeBetweenSummon: 6
   wormParent: {fileID: 1182048476}
   animator: {fileID: 285718490}
+  final_level: {fileID: 1353012908}
 --- !u!1 &1722413685
 GameObject:
   m_ObjectHideFlags: 0

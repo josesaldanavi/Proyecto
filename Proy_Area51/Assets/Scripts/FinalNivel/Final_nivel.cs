@@ -20,13 +20,20 @@ public class Final_nivel : MonoBehaviour {
         txt_coin.text = puntosTotal.ToString();
 	}
 
-    private void OnTriggerEnter2D(Collider2D other)
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        Movement.isPuzzleNotActive = true;
+    //        Debug.Log("Entro");
+    //        canvas_fin.enabled = true;
+    //    }
+    //}
+
+    public void showFinalCanvas()
     {
-        if (other.tag == "Player")
-        {
-            Movement.isPuzzleNotActive = true;
-            Debug.Log("Entro");
-            canvas_fin.enabled = true;
-        }
+        Movement.isPuzzleNotActive = true;
+        Debug.Log("Entro");
+        canvas_fin.enabled = true;
     }
 }

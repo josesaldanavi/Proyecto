@@ -18,6 +18,8 @@ public class MaskBossSummoner : MonoBehaviour {
 
     public float Ratio{ get { return 100/(redMaskBoss.hp + blueMaskBoss.hp+1); }}
 
+    public Final_nivel final_level;
+
 	// Use this for initialization
 	void Start () {
         //StartFight();
@@ -27,7 +29,7 @@ public class MaskBossSummoner : MonoBehaviour {
     	// Update is called once per frame
 	void Update () {
         if (redMaskBoss.hp == 0 && blueMaskBoss.hp == 0)
-            Destroy(gameObject);
+            FinishLevel();
 	}
     public void StartFight()
     {
@@ -89,5 +91,10 @@ public class MaskBossSummoner : MonoBehaviour {
                 worms.RemoveAt(i);
             }
         }
+    }
+    void FinishLevel()
+    {
+        final_level.showFinalCanvas();
+        Destroy(gameObject);
     }
 }

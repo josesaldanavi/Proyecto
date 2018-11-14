@@ -207,8 +207,11 @@ public class MovementSaltoV2 : Enemy
     }
     protected override void DestroyThis()
     {
-        if (parent)
+        if (parent){
             Destroy(parent);
+            Destroy(gameObject);
+        }
+            
         else Destroy(gameObject);
     }
 }
