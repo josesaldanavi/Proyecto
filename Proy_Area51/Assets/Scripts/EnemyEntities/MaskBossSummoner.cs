@@ -69,6 +69,7 @@ public class MaskBossSummoner : MonoBehaviour {
 
     public void BuffMonstersAttack(){
         Debug.Log("Buff attack");
+        animator.SetTrigger("Daño1");
         for (int i = 0; i < worms.Count;i++){
             if(worms[i]!=null)
             worms[i].AttackBuff(2f);
@@ -77,6 +78,7 @@ public class MaskBossSummoner : MonoBehaviour {
     public void BuffMonstersSpeed()
     {
         Debug.Log("Buff speed");
+        animator.SetTrigger("Daño2");
         for (int i = 0; i < worms.Count; i++)
         {
             if (worms[i] != null)
